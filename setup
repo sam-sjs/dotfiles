@@ -1,7 +1,9 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $0)
+
 #Symlink zsh config
-ln -s .zshrc $HOME
+ln -s $BASEDIR/.zshrc $HOME
 
 #Set iterm2 preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.dotfiles"
