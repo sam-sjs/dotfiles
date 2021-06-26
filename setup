@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#Symlink zsh config
+ln -s .zshrc $HOME
+
+#Set iterm2 preferences
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.dotfiles"
+defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
