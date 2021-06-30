@@ -17,9 +17,7 @@ ln -s $BASEDIR/.vim $HOME
 
 # Install OMZ plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
-##### MUST BE RUN MANUALLY - needs 'oh-my-zsh.sh'to run so that 'ZSH_CUSTOM' is set - not sure if it will work but try ditching 'ZSH_CUSTOM' and pathing directly to it
-#wget -O $ZSH_CUSTOM/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
 
 #Set iterm2 preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
