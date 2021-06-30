@@ -1,11 +1,7 @@
 # Current issues - leaning scripts is fun!
-# Needs oh-my-zsh installed - can I check if installed and install from the script if not? - maybe fixed, does pulling the OMZ folder work like an install?
-# Needs syntax highlighting plugin for OMZ installed - maybe fixed?
-# Needs 'common' theme for OMZ intalled - maybe fixed?
 # Currently the iTerm2 preferences get set to the .dotfiles dirctory correctly but for some reason the checkmark is not enables and the preferences aren't set.
 # iTerm2 colour preset still has to be set manually even though it looks like it has been enabled
 # Need 'SF Mono' font installed
-
 
 #!/bin/bash
 
@@ -18,7 +14,7 @@ ln -s $BASEDIR/.oh-my-zsh $HOME
 
 # Install OMZ plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $BASEDIR/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-wget -O $ZSH_CUSTOM/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+wget -O $ZSH_CUSTOM/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme 
 
 
 #Set iterm2 preferences
