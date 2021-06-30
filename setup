@@ -9,7 +9,12 @@
 
 #!/bin/bash
 
-BASEDIR=$(dirname $0)
+BASEDIR=$HOME/.dotfiles
+
+# Install OMZ plugins
+wget -O $ZSH_CUSTOM/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $BASEDIR/.oh-my-zsh/custom/plugins
+echo "source $BASEDIR/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 #Symlink configs
 ln -s $BASEDIR/.zshrc $HOME
@@ -17,5 +22,5 @@ ln -s $BASEDIR/.vim $HOME
 ln -s $BASEDIR/.oh-my-zsh $HOME
 
 #Set iterm2 preferences
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.dotfiles"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
 defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
