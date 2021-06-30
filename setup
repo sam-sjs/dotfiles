@@ -3,9 +3,12 @@
 # iTerm2 colour preset still has to be set manually even though it looks like it has been enabled
 # Need 'SF Mono' font installed
 
-#!/bin/bash
+#!/bin/zsh
 
 BASEDIR=$HOME/.dotfiles
+
+# Install OMZ
+ZSH= sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #Symlink configs
 ln -s $BASEDIR/.zshrc $HOME
