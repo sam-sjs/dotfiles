@@ -22,3 +22,13 @@ wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubuserco
 #Set iterm2 preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
 defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
+
+
+
+
+
+
+
+# Uncomment to install kitty terminal
+# Make sure to copy relevant configs before changing over to kitty
+#curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
