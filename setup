@@ -8,27 +8,31 @@
 BASEDIR=$HOME/.dotfiles
 
 # Install OMZ
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-rm $HOME/.zshrc
+if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	rm $HOME/.zshrc
+fi
 
 #Symlink configs
 ln -s $BASEDIR/.zshrc $HOME
 ln -s $BASEDIR/.vim $HOME
 
 # Install OMZ plugins
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+if [ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+fi
+if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
+	wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+fi
+
+
+# Install kitty terminal
+if [ ! -f /Applications/kitty.app/Contents/MacOS/kitty ]; then
+	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+	ln -s $BASEDIR/kitty.conf $HOME/.config/kitty/
+	ln -s $BASEDIR/atom-one-dark.conf $HOME/.config/kitty/
+fi
 
 #Set iterm2 preferences
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
-defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
-
-
-
-
-
-
-
-# Uncomment to install kitty terminal
-# Make sure to copy relevant configs before changing over to kitty
-#curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+#defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
+#defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
