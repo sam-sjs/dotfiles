@@ -50,3 +50,6 @@ ln -s $BASEDIR/.vim $HOME
 mkdir -p $HOME/.config/kitty
 ln -s $BASEDIR/kitty.conf $HOME/.config/kitty
 ln -s $BASEDIR/atom-one-dark.conf $HOME/.config/kitty
+ln -s $BASEDIR/pass_keys.py $HOME/.config/kitty
+ln -s $BASEDIR/neighboring_window.py $HOME/.config/kitty
+ln -s $BASEDIR/personal-kitty.conf $HOME/.config/kitty
