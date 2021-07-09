@@ -1,14 +1,24 @@
-" Install vim-plug plugin manager if not installed
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Auto install vim-plug plugin manager if not installed
+let plug_install = 0
+let autoload_plug_path = stdpath('config') . '/autoload/plug.vim'
+if !filereadable(autoload_plug_path)
+    silent exe '!curl -fL --create-dirs -o ' . autoload_plug_path . 
+        \ ' https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    execute 'source ' . fnameescape(autoload_plug_path)
+    let plug_install = 1
 endif
+unlet autoload_plug_path
 
 " List plugins to be loaded
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugins')
 Plug 'knubie/vim-kitty-navigator'
 call plug#end()
+
+if plug_install
+    PlugInstall --sync
+endif
+unlet plug_install
+
  
 " Personalised settings
 set hidden			" Possibility to have more than one unsaved buffers.
