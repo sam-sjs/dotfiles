@@ -1,21 +1,34 @@
 # Current issues - leaning scripts is fun!
-# Currently the iTerm2 preferences get set to the .dotfiles dirctory correctly but for some reason the checkmark is not enables and the preferences aren't set.
-# iTerm2 colour preset still has to be set manually even though it looks like it has been enabled
 # Need 'SF Mono' font installed
 
 #!/bin/zsh
 
 BASEDIR=$HOME/.dotfiles
 
+# Install Homebrew
+if [ ! $(which brew) ]; then
+	echo "Installing homebrew..."
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Update homebrew recipes
+brew update
+
+# Install brew packages
+PACKAGES=(git nvim)
+echo "Installing packages..."
+brew install ${PACKAGES[@]}
+
+# Install brew casks
+CASKS=(kitty)
+echo "Installing casks..."
+brew install --cask ${CASKS[@]}
+
 # Install OMZ
 if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 	rm $HOME/.zshrc
 fi
-
-#Symlink configs
-ln -s $BASEDIR/.zshrc $HOME
-ln -s $BASEDIR/.vim $HOME
 
 # Install OMZ plugins
 if [ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
@@ -25,14 +38,15 @@ if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
 	wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
 fi
 
+# Setup nvim config
+mkdir -p $HOME/.config/nvim
+ln -s $BASEDIR/init.vim $HOME/.config/nvim
 
-# Install kitty terminal
-if [ ! -f /Applications/kitty.app/Contents/MacOS/kitty ]; then
-	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-	ln -s $BASEDIR/kitty.conf $HOME/.config/kitty/
-	ln -s $BASEDIR/atom-one-dark.conf $HOME/.config/kitty/
-fi
+#Symlink configs
+ln -s $BASEDIR/.zshrc $HOME
+ln -s $BASEDIR/.vim $HOME
 
-#Set iterm2 preferences
-#defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASEDIR"
-#defaults write com.googlecode.itermw.plist LoadPrefsFromCustomFolder -bool true
+# Link kitty terminal config
+mkdir -p $HOME/.config/kitty
+ln -s $BASEDIR/kitty.conf $HOME/.config/kitty
+ln -s $BASEDIR/atom-one-dark.conf $HOME/.config/kitty

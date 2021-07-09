@@ -1,5 +1,9 @@
 #Custom additions by meeeee.
 ZSH_DISABLE_COMPFIX=true
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+alias vim="nvim"
+alias vimdiff='nvim -d'
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
