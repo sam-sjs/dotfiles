@@ -45,6 +45,10 @@ let &titlestring='%t - nvim'
 " Personalised settings
 set hidden			" Possibility to have more than one unsaved buffers.
 set nu rnu			" Line numbering - relative numbering
+set tabstop=4			" Width of a tab
+set shiftwidth=4		" Amount of whitespace to add or remove
+set softtabstop=4		" Fine tunes whitespace inserted
+set expandtab			" Insert spaces instead of tabs
 
 
 
@@ -52,8 +56,6 @@ set nu rnu			" Line numbering - relative numbering
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = "javascript",
-	highlight = {
-		enable = true,
-	}
+	highlight = { enable = true }
 }
 EOF

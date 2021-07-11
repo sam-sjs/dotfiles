@@ -47,8 +47,10 @@ ln -s $BASEDIR/.zshrc $HOME
 
 # Link kitty terminal config
 mkdir -p $HOME/.config/kitty
+mkdir -p $HOME/.config/nvim/ftplugin
 ln -s $BASEDIR/kitty.conf $HOME/.config/kitty
 ln -s $BASEDIR/one-dark.conf $HOME/.config/kitty
 ln -s $BASEDIR/pass_keys.py $HOME/.config/kitty
 ln -s $BASEDIR/neighboring_window.py $HOME/.config/kitty
 ln -s $BASEDIR/personal-kitty.conf $HOME/.config/kitty
+ln -s $BASEDIR/javascript.vim $HOME/.config/nvim/ftplugin
