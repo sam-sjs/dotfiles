@@ -44,7 +44,6 @@ ln -s $BASEDIR/init.vim $HOME/.config/nvim
 
 #Symlink configs
 ln -s $BASEDIR/.zshrc $HOME
-ln -s $BASEDIR/.vim $HOME
 
 # Link kitty terminal config
 mkdir -p $HOME/.config/kitty

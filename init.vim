@@ -37,6 +37,8 @@ if (empty($TMUX))
   endif
 endif
 colorscheme onedark
+set title
+let &titlestring='%t - nvim'
  
 " Personalised settings
 set hidden			" Possibility to have more than one unsaved buffers.
