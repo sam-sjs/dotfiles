@@ -13,6 +13,8 @@ unlet autoload_plug_path
 call plug#begin('~/.config/nvim/plugins')
 Plug 'knubie/vim-kitty-navigator'
 Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 if plug_install
@@ -43,3 +45,15 @@ let &titlestring='%t - nvim'
 " Personalised settings
 set hidden			" Possibility to have more than one unsaved buffers.
 set nu rnu			" Line numbering - relative numbering
+
+
+
+" Treesitter modules
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	ensure_installed = "javascript",
+	highlight = {
+		enable = true,
+	}
+}
+EOF

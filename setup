@@ -15,7 +15,7 @@ fi
 brew update
 
 # Install brew packages
-PACKAGES=(git nvim)
+PACKAGES=(git nvim fzf)
 echo "Installing packages..."
 brew install ${PACKAGES[@]}
 
