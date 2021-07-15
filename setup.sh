@@ -1,5 +1,6 @@
 # Current issues - leaning scripts is fun!
 # Need 'SF Mono' font installed
+# Add qmk into .dotfiles
 
 #!/bin/zsh
 
@@ -44,7 +45,7 @@ if [ "$FULL_INSTALL" == true ]; then
     brew install ${PACKAGES[@]}
 
     # Install brew casks
-    CASKS=(kitty)
+    CASKS=(kitty hammerspoon)
     echo "Installing casks..."
     brew install --cask ${CASKS[@]}
 
@@ -81,3 +82,4 @@ ln -s $BASEDIR/personal-kitty.conf $HOME/.config/kitty
 ln -s $BASEDIR/javascript.vim $HOME/.config/nvim/ftplugin
 ln -s $BASEDIR/typescript.vim $HOME/.config/nvim/ftplugin
 ln -s $BASEDIR/typescriptreact.vim $HOME/.config/nvim/ftplugin
+ln -s $BASEDIR/.hammerspoon $HOME

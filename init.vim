@@ -1,4 +1,9 @@
 " Auto install vim-plug plugin manager if not installed
+
+" Key mappings
+:nnoremap <silent> <F3> :nohlsearch<CR>
+
+" Install vim-plug if not installed
 let plug_install = 0
 let autoload_plug_path = stdpath('config') . '/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
@@ -55,7 +60,8 @@ set expandtab			" Insert spaces instead of tabs
 " Treesitter modules
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "javascript", "typescript", "tsx", "bash", "python" },
+    ensure_installed = { "javascript", "typescript", "tsx", "bash", "python", "c",
+                         "lua" },
 	highlight = { enable = true }
 }
 EOF
