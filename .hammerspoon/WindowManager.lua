@@ -1,113 +1,166 @@
-hyper = {"cmd", "alt", "ctrl", "shift"}
+hyper = {"cmd", "alt", "ctrl"}
+gridWidth = 24
+gridHeight = 12
+top = 0
+left = 0
+thirdWidth = gridWidth / 3
+twoThirdsWidth = gridWidth * 2 / 3
+sixthWidth = gridWidth / 6
+halfHeight = gridHeight / 2
+halfWidth = gridWidth / 2
+quarterWidth = gridWidth / 2
+threeQuarterWidth = gridWidth / 3
 
-local screen = hs.screen.mainScreen():frame()
+hs.grid.setGrid(gridWidth..'x'..gridHeight)
+hs.grid.setMargins('0, 0')
 
-local screenPosition = {
+local gridPosition = {
     leftThird = {
-        x = screen.x, y = screen.y, w = screen.w / 3, h = screen.h
+        x = left, y = top, w = thirdWidth, h = gridHeight
+    },
+    leftTwoThirds = {
+        x = left, y = top, w = twoThirdsWidth, h = gridHeight
     },
     midThird = {
-        x = screen.w / 3, y = screen.y, w = screen.w / 3, h = screen.h
+        x = thirdWidth, y = top, w = thirdWidth, h = gridHeight
+    },
+    midTwoThirds = {
+        x = sixthWidth, y = top, w = twoThirdsWidth, h = gridHeight
+    },
+    midHalf = {
+        x = quarterWidth, y = top, w = halfWidth, h = gridHeight
     },
     rightThird = {
-        x = screen.w * 2 / 3, y = screen.y, w = screen.w / 3, h = screen.h
+        x = twoThirdsWidth, y = top, w = thirdWidth, h = gridHeight
     },
-    leftTwoThird = {
-        x = screen.x, y = screen.y, w = screen.w * 2 / 3, h = screen.h
-    },
-    midTwoThird = {
-        x = screen.w / 6, y = screen.y, w = screen.w * 2 / 3, h = screen.h
-    },
-    rightTwoThird = {
-        x = screen.w / 3, y = screen.y, w = screen.w * 2 / 3, h = screen.h
+    rightTwoThirds = {
+        x = thirdWidth, y = top, w = twoThirdsWidth, h = gridHeight
     },
     topLeftSixth = {
-        x = screen.x, y = screen.y, w = screen.w / 3, h = screen.h / 2
-    }, 
+        x = left, y = top, w = thirdWidth, h = halfHeight
+    },
+    topLeftTwoSixths = {
+        x = left, y = top, w = twoThirdsWidth, h = halfHeight
+    },
     topMidSixth = {
-        x = screen.w / 3, y = screen.y, w = screen.w / 3, h = screen.h / 2
-    }, 
+        x = thirdWidth, y = top, w = thirdWidth, h = halfHeight
+    },
+    topMidTwoSixths = {
+        x = thirdWidth, y = top, w = twoThirdsWidth, h = halfHeight
+    },
     topRightSixth = {
-        x = screen.w * 2 / 3, y = screen.y, w = screen.w / 3, h = screen.h / 2
-    }, 
+        x = twoThirdsWidth, y = top, w = thirdWidth, h = halfHeight
+    },
+    topRightTwoSixths = {
+        x = thirdWidth, y = top, w = twoThirdsWidth, h = halfHeight
+    },
+    bottomLeftSixth = {
+        x = left, y = halfHeight, w = thirdWidth, h = halfHeight
+    },
+    bottomLeftTwoSixths = {
+        x = left, y = halfHeight, w = twoThirdsWidth, h = halfHeight
+    },
+    bottomMidSixth = {
+        x = thirdWidth, y = halfHeight, w = thirdWidth, h = halfHeight
+    },
+    bottomMidTwoSixths = {
+        x = sixthWidth, y = halfHeight, w = twoThirdsWidth, h = halfHeight
+    },
+    bottomRightSixth = {
+        x = twoThirdsWidth, y = halfHeight, w = thirdWidth, h = halfHeight
+    },
+    bottomRightTwoSixths = {
+        x = twoThirdsWidth, y = halfHeight, w = twoThirdsWidth, h = halfHeight
+    },
+    topLeftQuarter = {
+        x = left, y = top, w = halfWidth, h = halfHeight
+    },
+    topRightQuarter = {
+        x = halfWidth, y = top, w = halfWidth, h = halfHeight
+    },
+    bottomLeftQuarter = {
+        x = left, y = top, w = halfWidth, h = halfHeight
+    },
+    bottomRightQuarter = {
+        x = halfWidth, y = top, w = halfWidth, h = halfHeight
+    },
+    topLeftEighth = {
+        x = left, y = top, w = quarterWidth, h = halfHeight
+    },
+    topRightEighth = {
+        x = threeQuarterWidth, y = top, w = quarterWidth, h = halfHeight
+    },
+    bottomLeftEighth = {
+        x = left, y = halfHeight, w = quarterWidth, h = halfHeight
+    },
+    bottomRightEighth = {
+        x = threeQuarterWidth, y = halfHeight, w = thirdWidth, h = halfHeight
+    }
 }
 
-function isEqual(frame1, frame2)
-    return frame1.x == frame2.x and frame1.y == frame2.y and
-           frame1.w == frame2.w and frame1.h == frame2.h
+function isEqual(cell1, cell2)
+    return cell1.x == cell2.x and cell1.y == cell2.y and
+           cell1.w == cell2.w and cell1.h == cell2.h
 end
 
 function moveFocusedWindow(position, altPosition)
     local window = hs.window.focusedWindow()
-    local frame = window:frame()
-    if isEqual(frame, position) then
-        window:setFrame(altPosition)
+    local cell = hs.grid.get(window)
+    if isEqual(cell, position) then
+        hs.grid.set(window, altPosition)
     else
-        window:setFrame(position)
+        hs.grid.set(window, position)
     end
 end
 
 hs.hotkey.bind(hyper, "J", function()
-    moveFocusedWindow(screenPosition.leftThird, screenPosition.leftTwoThird)
+    moveFocusedWindow(gridPosition.leftThird, gridPosition.leftTwoThirds)
 end)
 
 hs.hotkey.bind(hyper, "K", function()
-    moveFocusedWindow(screenPosition.midThird, screenPosition.midTwoThird)
+    moveFocusedWindow(gridPosition.midThird, gridPosition.midTwoThirds)
 end)
 
 hs.hotkey.bind(hyper, "L", function()
-    moveFocusedWindow(screenPosition.rightThird, screenPosition.rightTwoThird)
+    moveFocusedWindow(gridPosition.rightThird, gridPosition.rightTwoThirds)
 end)
 
---hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "J", function()
---    local win = hs.window.focusedWindow()
---    local frame = win:frame()
---    local screen = win:screen():frame()
---
---    if frame.w == screen.w / 3 and frame.x == screen.x then
---        frame.w = screen.w * 2 / 3
---    else
---        frame.w = screen.w / 3
---    end
---
---    frame.x = screen.x
---    frame.y = screen.y
---    frame.h = screen.h
---    win:setFrame(frame)
---end)
---
---hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "K", function()
---    local win = hs.window.focusedWindow()
---    local frame = win:frame()
---    local screen = win:screen():frame()
---
---    if frame.w == screen.w / 3 and frame.x == screen.w / 3 then
---        frame.w = screen.w * 2 / 3
---        frame.x = screen.w * 1 / 6
---    else
---        frame.w = screen.w / 3
---        frame.x = screen.w * 1 / 3
---    end
---
---    frame.y = screen.y
---    frame.h = screen.h
---    win:setFrame(frame)
---end)
---
---hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "L", function()
---    local win = hs.window.focusedWindow()
---    local frame = win:frame()
---    local screen = win:screen():frame()
---
---    if frame.w == screen.w / 3 and frame.x == screen.w * 2 / 3 then
---        frame.w = screen.w * 2 / 3
---        frame.x = screen.w / 3
---    else
---        frame.w = screen.w / 3
---        frame.x = screen.w * 2 / 3
---    end
---     
---    frame.y = screen.y
---    frame.h = screen.h
---    win:setFrame(frame)
---end)
+hs.hotkey.bind(hyper, "U", function()
+    moveFocusedWindow(gridPosition.topLeftSixth, gridPosition.topLeftTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, "I", function()
+    moveFocusedWindow(gridPosition.topMidSixth, gridPosition.topMidTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, "O", function()
+    moveFocusedWindow(gridPosition.topRightSixth, gridPosition.topRightTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, "M", function()
+    moveFocusedWindow(gridPosition.bottomLeftSixth, gridPosition.bottomLeftTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, ",", function()
+    moveFocusedWindow(gridPosition.bottomMidSixth, gridPosition.bottomMidTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, ".", function()
+    moveFocusedWindow(gridPosition.bottomRightSixth, gridPosition.bottomRightTwoSixths)
+end)
+
+hs.hotkey.bind(hyper, "Y", function()
+    moveFocusedWindow(gridPosition.topLeftQuarter, gridPosition.topLeftEighth)
+end)
+
+hs.hotkey.bind(hyper, "P", function()
+    moveFocusedWindow(gridPosition.topRightQuarter, gridPosition.topRightEighth)
+end)
+
+hs.hotkey.bind(hyper, "N", function()
+    moveFocusedWindow(gridPosition.bottomLeftQuarter, gridPosition.bottomLeftEighth)
+end)
+
+hs.hotkey.bind(hyper, "/", function()
+    moveFocusedWindow(gridPosition.bottomRightQuarter, gridPosition.bottomRightEighth)
+end)
