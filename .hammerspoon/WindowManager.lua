@@ -20,7 +20,16 @@ local screenPosition = {
     },
     rightTwoThird = {
         x = screen.w / 3, y = screen.y, w = screen.w * 2 / 3, h = screen.h
-    }
+    },
+    topLeftSixth = {
+        x = screen.x, y = screen.y, w = screen.w / 3, h = screen.h / 2
+    }, 
+    topMidSixth = {
+        x = screen.w / 3, y = screen.y, w = screen.w / 3, h = screen.h / 2
+    }, 
+    topRightSixth = {
+        x = screen.w * 2 / 3, y = screen.y, w = screen.w / 3, h = screen.h / 2
+    }, 
 }
 
 function isEqual(frame1, frame2)
@@ -31,8 +40,6 @@ end
 function moveFocusedWindow(position, altPosition)
     local window = hs.window.focusedWindow()
     local frame = window:frame()
-    print(frame)
-    print(hs.geometry(position))
     if isEqual(frame, position) then
         window:setFrame(altPosition)
     else
@@ -41,8 +48,15 @@ function moveFocusedWindow(position, altPosition)
 end
 
 hs.hotkey.bind(hyper, "J", function()
-    print("J CALLED")
     moveFocusedWindow(screenPosition.leftThird, screenPosition.leftTwoThird)
+end)
+
+hs.hotkey.bind(hyper, "K", function()
+    moveFocusedWindow(screenPosition.midThird, screenPosition.midTwoThird)
+end)
+
+hs.hotkey.bind(hyper, "L", function()
+    moveFocusedWindow(screenPosition.rightThird, screenPosition.rightTwoThird)
 end)
 
 --hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "J", function()
