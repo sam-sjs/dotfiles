@@ -61,7 +61,7 @@ set expandtab			" Insert spaces instead of tabs
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = { "javascript", "typescript", "tsx", "bash", "python", "c",
-                         "lua" },
+                         "lua", "c_sharp", "html", "css" },
 	highlight = { enable = true }
 }
 EOF
