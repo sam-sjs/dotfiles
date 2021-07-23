@@ -188,7 +188,9 @@ function shrinkWestWindows(fWindow)
     for i, wWindow in pairs(westWindows) do
         wWindowCell = hs.grid.get(wWindow)
         if wWindowCell.x + wWindowCell.w >= fWindowCell.x then
-            hs.grid.adjustWindow(function(frame) frame.w = math.max(fWindowCell.x - 1, 1) end, wWindow)
+            hs.grid.adjustWindow(function(frame)
+                frame.w = math.max(fWindowCell.x - 1, 1)
+            end, wWindow)
         end
     end
 end
@@ -199,7 +201,9 @@ function shrinkNorthWindows(fWindow)
     for i, nWindow in pairs(northWindows) do
         nWindowCell = hs.grid.get(nWindow)
         if nWindowCell.y + nWindowCell.h >= fWindowCell.y then
-            hs.grid.adjustWindow(function(frame) frame.h = math.max(fWindowCell.y - 1, 1) end, nWindow)
+            hs.grid.adjustWindow(function(frame)
+                frame.h = math.max(fWindowCell.y - 1, 1)
+            end, nWindow)
         end
     end
 end
