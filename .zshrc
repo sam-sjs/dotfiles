@@ -1,4 +1,3 @@
-#Custom additions by meeeee.
 ZSH_DISABLE_COMPFIX=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
