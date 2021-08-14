@@ -4,6 +4,11 @@ export EDITOR="$VISUAL"
 alias vim="nvim"
 alias vimdiff='nvim -d'
 
+# Allow for kubernetes 'kubectl' autocompletion
+autoload -Uz compinit
+compinit
+source <(kubectl completion zsh)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
