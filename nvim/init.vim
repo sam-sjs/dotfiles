@@ -16,7 +16,6 @@ unlet autoload_plug_path
 
 " List plugins to be loaded
 call plug#begin('~/.config/nvim/plugins')
-Plug 'knubie/vim-kitty-navigator', {'do': 'cp ./*.py ~/.config/kitty/'}
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -62,17 +61,16 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-colorscheme onedark
-set title
-let &titlestring='%t - nvim'
  
 " Personalised settings
 set hidden			" Possibility to have more than one unsaved buffers.
-set nu rnu			" Line numbering - relative numbering
+"set nu rnu			" Line numbering - relative numbering
 set tabstop=4			" Width of a tab
 set shiftwidth=4		" Amount of whitespace to add or remove
 set softtabstop=4		" Fine tunes whitespace inserted
 set expandtab			" Insert spaces instead of tabs
+set nu
+colorscheme flattened_light
 
 
 

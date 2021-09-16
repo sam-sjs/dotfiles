@@ -1,35 +1,36 @@
 # Current issues - leaning scripts is fun!
 # Need 'SF Mono' font installed
 # Add qmk into .dotfiles
+# Update 'kitty' (and other software) when running script
 
 #!/bin/zsh
 
 # Runtime flags
-HELP=false
-FULL_INSTALL=false
+helpme=false
+full_install=false
 
 # Set runtime options
 for arg in "$@"
 do
     case "$arg" in
         "--help" | "-h")
-            HELP=true
+            helpme=true
             ;;
         "--full" | "-f")
-            FULL_INSTALL=true
+            full_install=true
             ;;
     esac
 done
 
-if [ "$HELP" == true ]; then
+if [ "$helpme" == true ]; then
     echo "  --help [-h] Display this help message (congrats on making it this far!)"
     echo "  --full [-f] Perform full install"
     exit 0
 fi
 
-BASEDIR=$HOME/.dotfiles
+base_dir=$HOME/.dotfiles
 
-if [ "$FULL_INSTALL" == true ]; then
+if [ "$full_install" == true ]; then
     # Install Homebrew
     if [ ! $(which brew) ]; then
         echo "Installing homebrew..."
@@ -40,14 +41,14 @@ if [ "$FULL_INSTALL" == true ]; then
     brew update
 
     # Install brew packages
-    PACKAGES=(git nvim fzf)
+    packages=(git nvim fzf)
     echo "Installing packages..."
-    brew install ${PACKAGES[@]}
+    brew install ${packages[@]}
 
     # Install brew casks
-    CASKS=(kitty hammerspoon)
+    casks=(kitty hammerspoon)
     echo "Installing casks..."
-    brew install --cask ${CASKS[@]}
+    brew install --cask ${casks[@]}
 
     # Install OMZ
     if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
@@ -64,22 +65,12 @@ if [ "$FULL_INSTALL" == true ]; then
     fi
 fi
 
-# Setup nvim config
-mkdir -p $HOME/.config/nvim
-ln -s $BASEDIR/init.vim $HOME/.config/nvim
-
 #Symlink configs
-ln -s $BASEDIR/.zshrc $HOME
-
-# Link kitty terminal config
-mkdir -p $HOME/.config/kitty
-mkdir -p $HOME/.config/nvim/ftplugin
-ln -s $BASEDIR/kitty.conf $HOME/.config/kitty
-ln -s $BASEDIR/one-dark.conf $HOME/.config/kitty
-ln -s $BASEDIR/pass_keys.py $HOME/.config/kitty
-ln -s $BASEDIR/neighboring_window.py $HOME/.config/kitty
-ln -s $BASEDIR/personal-kitty.conf $HOME/.config/kitty
-ln -s $BASEDIR/javascript.vim $HOME/.config/nvim/ftplugin
-ln -s $BASEDIR/typescript.vim $HOME/.config/nvim/ftplugin
-ln -s $BASEDIR/typescriptreact.vim $HOME/.config/nvim/ftplugin
-ln -s $BASEDIR/.hammerspoon $HOME
+mkdir -p $HOME/.config/nvim
+ln -s $base_dir/.zshrc $HOME
+ln -s $base_dir/kitty/ $HOME/.config
+ln -s $base_dir/nvim/autoload/ $HOME/.config/nvim # For the moment can't symlink entire nvim folder as plugins subfolder causes issues with submodules.
+ln -s $base_dir/nvim/colors/ $HOME/.config/nvim
+ln -s $base_dir/nvim/ftplugin/ $HOME/.config/nvim
+ln -s $base_dir/nvim/init.vim $HOME/.config/nvim
+ln -s $base_dir/.hammerspoon $HOME
