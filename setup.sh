@@ -40,6 +40,11 @@ if [ "$full_install" == true ]; then
     # Update homebrew recipes
     brew update
 
+    # Tap brew kegs
+    kegs=(homebrew/cask-fonts)
+    echo "Tapping kegs..."
+    brew tap ${kegs[@]}
+
     # Install brew packages
     packages=(git nvim fzf)
     echo "Installing packages..."
@@ -49,7 +54,7 @@ if [ "$full_install" == true ]; then
     /usr/local/opt/fzf/install --all
 
     # Install brew casks
-    casks=(kitty hammerspoon)
+    casks=(kitty hammerspoon font-iosevka)
     echo "Installing casks..."
     brew install --cask ${casks[@]}
 
