@@ -45,6 +45,9 @@ if [ "$full_install" == true ]; then
     echo "Installing packages..."
     brew install ${packages[@]}
 
+    # Setup fzf
+    /usr/local/opt/fzf/install --all
+
     # Install brew casks
     casks=(kitty hammerspoon)
     echo "Installing casks..."

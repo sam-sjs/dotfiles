@@ -1,7 +1,7 @@
-" Auto install vim-plug plugin manager if not installed
+" vim-fugitive would be nice for git once you figure out how to use all the
+" commands properly - it looks like airblade/git-gutter might be useful too.
 
-" Key mappings
-:nnoremap <silent> <F3> :nohlsearch<CR>
+let g:mapleader="\<Space>"
 
 " Install vim-plug if not installed
 let plug_install = 0
@@ -16,12 +16,22 @@ unlet autoload_plug_path
 
 " List plugins to be loaded
 call plug#begin('~/.config/nvim/plugins')
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+    nnoremap <silent> <leader><space> :Files<CR>
+    nnoremap <silent> <leader>a :Buffers<CR>
+Plug 'joshdick/onedark.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'SirVer/ultisnips'
+    nnoremap <leader>se :UltiSnipsEdit<CR>
+    let g:UltiSnipsSnippetsDir='~/.config/nvim/plugins/vim-snippets/UltiSnips'
+    let g:UltiSnipsEditSplit='horizontal'
+    let g:UltiSnipsExpandTrigger='<tab>'
+    let g:UltiSnipsListSnippets='<c-l>'
+    let g:UltiSnipsJumpForwardTrigger='<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 Plug 'honza/vim-snippets'
 call plug#end()
 
@@ -30,12 +40,6 @@ if plug_install
 endif
 unlet plug_install
 
-" Ultisnips config
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" LSP Config
 lua <<EOF
 require'lspinstall'.setup()
 
@@ -63,16 +67,31 @@ if (empty($TMUX))
 endif
  
 " Personalised settings
-set hidden			" Possibility to have more than one unsaved buffers.
-"set nu rnu			" Line numbering - relative numbering
+set hidden			    " Possibility to have more than one unsaved buffers.
+set number              " Show line numbering
+"set relativenumber      " Use relative numbering instead of absolute
 set tabstop=4			" Width of a tab
 set shiftwidth=4		" Amount of whitespace to add or remove
 set softtabstop=4		" Fine tunes whitespace inserted
 set expandtab			" Insert spaces instead of tabs
-set nu
+set lazyredraw
 colorscheme flattened_light
 
+" Key mappings
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap Y y$
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 
+" Auto expanding
+inoremap (; (<CR>);<C-c>O
+inoremap (, (<CR>),<C-c>O
+inoremap {; {<CR>};<C-c>O
+inoremap {, {<CR>},<C-c>O
+inoremap [; [<CR>];<C-c>O
+inoremap [, [<CR>],<C-c>O
 
 " Treesitter modules
 lua <<EOF
