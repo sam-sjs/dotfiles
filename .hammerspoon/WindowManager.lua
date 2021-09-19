@@ -182,6 +182,17 @@ function expandWindowSouth()
     end
 end
 
+function generate_new_rect(x, y, w, h)
+    screen = hs.window.focusedWindow():screen()
+    screen_grid = hs.grid.getGridFrame(screen)
+    if x < 0 then x = 0 end
+    if x + w > screen_grid.w then w = screen_grid.w - x end
+    if y < 0 then y = 0 end
+    if y + h > screen_grid.h then h = screen_grid.h - y end
+    
+    return hs.geometry.rect(x, y, w, h)
+end
+
 function shrinkWestWindows(fWindow)
     westWindows = fWindow:windowsToWest()
     fWindowCell = hs.grid.get(fWindow)
