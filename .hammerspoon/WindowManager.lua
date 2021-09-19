@@ -133,7 +133,7 @@ end
 function expandWindowEast()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
-    screenGrid = hs.grid.getGridFrame(fwin:screen())
+    screen_grid = hs.grid.getGridFrame(fwin:screen())
     clearAdjacentWindows("east")
     hs.grid.set(fwin, generateNewCell(cell.x, cell.y, cell.w + 1, cell.h))
 end
@@ -141,12 +141,12 @@ end
 function expandWindowSouth()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
-    screenGrid = hs.grid.getGridFrame(fwin:screen())
+    screen_grid = hs.grid.getGridFrame(fwin:screen())
     clearAdjacentWindows("south")
     hs.grid.set(fwin, generateNewCell(cell.x, cell.y, cell.w, cell.h + 1))
 end
 
-function generateNewCell(x, y, w, h)
+function generateNewCell(x, y, w, h) -- This should take a direction arg and store how to grow
     screen = hs.window.focusedWindow():screen()
     screen_grid = hs.grid.getGridFrame(screen)
     if x < 0 then x = 0 end
