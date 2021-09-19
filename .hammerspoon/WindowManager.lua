@@ -117,72 +117,36 @@ function moveFocusedWindow(cellOptions)
 end
 
 function expandWindowWest()
-    fWindow = hs.window.focusedWindow()
-    fWindowCell = hs.grid.get(fWindow)
-    shrinkWestWindows(fWindow)
-    if fWindowCell.x >= 1 then
-        hs.grid.adjustWindow(function(frame)
-            frame.x = frame.x - 1
-            frame.w = frame.w + 1
-        end, fWindow)
-    else
-        hs.grid.adjustWindow(function(frame)
-            frame.x = 0
-            frame.w = frame.w + frame.x
-        end, fWindow)
-    end
+    fwin = hs.window.focusedWindow()
+    cell = hs.grid.get(fwin)
+    shrinkWestWindows(fwin)
+    hs.grid.set(fwin, generate_new_cell(cell.x - 1, cell.y, cell.w + 1, cell.h))
 end
 
 function expandWindowNorth()
-    fWindow = hs.window.focusedWindow()
-    fWindowCell = hs.grid.get(fWindow)
-    shrinkNorthWindows(fWindow)
-    if fWindowCell.y >= 1 then
-        hs.grid.adjustWindow(function(frame)
-            frame.y = frame.y - 1
-            frame.h = frame.h + 1
-        end, fWindow)
-    else
-        hs.grid.adjustWindow(function(frame)
-            frame.y = 0
-            frame.h = frame.h + frame.y
-        end, fWindow)
-    end
+    fwin = hs.window.focusedWindow()
+    cell = hs.grid.get(fwin)
+    shrinkNorthWindows(fwin)
+    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y - 1, cell.w, cell.h + 1))
 end
 
 function expandWindowEast()
-    fWindow = hs.window.focusedWindow()
-    fWindowCell = hs.grid.get(fWindow)
-    screenGrid = hs.grid.getGridFrame(fWindow:screen())
-    shrinkEastWindows(fWindow)
-    if fWindowCell.x + fWindowCell.w <= screenGrid.w - 1 then
-        hs.grid.adjustWindow(function(frame)
-            frame.w = frame.w + 1
-        end, fWindow)
-    else
-        hs.grid.adjustWindow(function(frame)
-            frame.w = screenGrid.w - frame.x
-        end, fWindow)
-    end
+    fwin = hs.window.focusedWindow()
+    cell = hs.grid.get(fwin)
+    screenGrid = hs.grid.getGridFrame(fwin:screen())
+    shrinkEastWindows(fwin)
+    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y, cell.w + 1, cell.h))
 end
 
 function expandWindowSouth()
-    fWindow = hs.window.focusedWindow()
-    fWindowCell = hs.grid.get(fWindow)
-    screenGrid = hs.grid.getGridFrame(fWindow:screen())
-    shrinkSouthWindows(fWindow)
-    if fWindowCell.y + fWindowCell.h <= screenGrid.h - 1 then
-        hs.grid.adjustWindow(function(frame)
-            frame.h = frame.h + 1
-        end, fWindow)
-    else
-        hs.grid.adjustWindow(function(frame)
-            frame.h = screenGrid.h - frame.y
-        end, fWindow)
-    end
+    fwin = hs.window.focusedWindow()
+    cell = hs.grid.get(fwin)
+    screenGrid = hs.grid.getGridFrame(fwin:screen())
+    shrinkSouthWindows(fwin)
+    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y, cell.w, cell.h + 1))
 end
 
-function generate_new_rect(x, y, w, h)
+function generate_new_cell(x, y, w, h)
     screen = hs.window.focusedWindow():screen()
     screen_grid = hs.grid.getGridFrame(screen)
     if x < 0 then x = 0 end
