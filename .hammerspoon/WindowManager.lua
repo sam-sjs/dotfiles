@@ -1,4 +1,4 @@
-local hyper = {"cmd", "alt", "ctrl"}
+local hyperKey = {"cmd", "alt", "ctrl"}
 local gridWidth = 24
 local gridHeight = 12
 local top = 0
@@ -254,78 +254,78 @@ function isEqual(cell1, cell2)
 end
 
 
-hs.hotkey.bind(hyper, "J", function()
+hs.hotkey.bind(hyperKey, "J", function()
     moveFocusedWindow({gridPosition.leftThird, gridPosition.leftTwoThirds})
 end)
 
-hs.hotkey.bind(hyper, "K", function()
+hs.hotkey.bind(hyperKey, "K", function()
     moveFocusedWindow({gridPosition.midThird, gridPosition.midTwoThirds, gridPosition.midHalf})
 end)
 
-hs.hotkey.bind(hyper, "L", function()
+hs.hotkey.bind(hyperKey, "L", function()
     moveFocusedWindow({gridPosition.rightThird, gridPosition.rightTwoThirds})
 end)
 
-hs.hotkey.bind(hyper, "U", function()
+hs.hotkey.bind(hyperKey, "U", function()
     moveFocusedWindow({gridPosition.topLeftSixth, gridPosition.topLeftTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, "I", function()
+hs.hotkey.bind(hyperKey, "I", function()
     moveFocusedWindow({gridPosition.topMidSixth, gridPosition.topMidTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, "O", function()
+hs.hotkey.bind(hyperKey, "O", function()
     moveFocusedWindow({gridPosition.topRightSixth, gridPosition.topRightTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, "M", function()
+hs.hotkey.bind(hyperKey, "M", function()
     moveFocusedWindow({gridPosition.bottomLeftSixth, gridPosition.bottomLeftTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, ",", function()
+hs.hotkey.bind(hyperKey, ",", function()
     moveFocusedWindow({gridPosition.bottomMidSixth, gridPosition.bottomMidTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, ".", function()
+hs.hotkey.bind(hyperKey, ".", function()
     moveFocusedWindow({gridPosition.bottomRightSixth, gridPosition.bottomRightTwoSixths})
 end)
 
-hs.hotkey.bind(hyper, "Y", function()
+hs.hotkey.bind(hyperKey, "Y", function()
     moveFocusedWindow({gridPosition.topLeftQuarter, gridPosition.topLeftEighth})
 end)
 
-hs.hotkey.bind(hyper, "P", function()
+hs.hotkey.bind(hyperKey, "P", function()
     moveFocusedWindow({gridPosition.topRightQuarter, gridPosition.topRightEighth})
 end)
 
-hs.hotkey.bind(hyper, "N", function()
+hs.hotkey.bind(hyperKey, "N", function()
     moveFocusedWindow({gridPosition.bottomLeftQuarter, gridPosition.bottomLeftEighth})
 end)
 
-hs.hotkey.bind(hyper, "/", function()
+hs.hotkey.bind(hyperKey, "/", function()
     moveFocusedWindow({gridPosition.bottomRightQuarter, gridPosition.bottomRightEighth})
 end)
 
-hs.hotkey.bind(hyper, "H", function()
+hs.hotkey.bind(hyperKey, "H", function()
     moveFocusedWindow({gridPosition.leftHalf, gridPosition.leftQuarter})
 end)
 
-hs.hotkey.bind(hyper, ";", function()
+hs.hotkey.bind(hyperKey, ";", function()
     moveFocusedWindow({gridPosition.rightHalf, gridPosition.rightQuarter})
 end)
 
-hs.hotkey.bind(hyper, "left", function()
+hs.hotkey.bind(hyperKey, "left", function()
     expandWindowWest()
 end)
 
-hs.hotkey.bind(hyper, "right", function()
+hs.hotkey.bind(hyperKey, "right", function()
     expandWindowEast()
 end)
 
-hs.hotkey.bind(hyper, "up", function()
+hs.hotkey.bind(hyperKey, "up", function()
     expandWindowNorth()
 end)
 
-hs.hotkey.bind(hyper, "down", function()
+hs.hotkey.bind(hyperKey, "down", function()
     expandWindowSouth()
 end)

@@ -46,9 +46,12 @@ if [ "$full_install" == true ]; then
     brew tap ${kegs[@]}
 
     # Install brew packages
-    packages=(git nvim fzf)
+    packages=(git nvim fzf python)
     echo "Installing packages..."
     brew install ${packages[@]}
+
+    # Setup python3 for nvim
+    python3 -m pip install --user --uprade pynvim
 
     # Setup fzf
     /usr/local/opt/fzf/install --all
