@@ -119,34 +119,34 @@ end
 function expandWindowWest()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
-    shrinkWestWindows(fwin)
-    hs.grid.set(fwin, generate_new_cell(cell.x - 1, cell.y, cell.w + 1, cell.h))
+    clearAdjacentWindows("west")
+    hs.grid.set(fwin, generateNewCell(cell.x - 1, cell.y, cell.w + 1, cell.h))
 end
 
 function expandWindowNorth()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
-    shrinkNorthWindows(fwin)
-    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y - 1, cell.w, cell.h + 1))
+    clearAdjacentWindows("north")
+    hs.grid.set(fwin, generateNewCell(cell.x, cell.y - 1, cell.w, cell.h + 1))
 end
 
 function expandWindowEast()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
     screenGrid = hs.grid.getGridFrame(fwin:screen())
-    shrinkEastWindows(fwin)
-    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y, cell.w + 1, cell.h))
+    clearAdjacentWindows("east")
+    hs.grid.set(fwin, generateNewCell(cell.x, cell.y, cell.w + 1, cell.h))
 end
 
 function expandWindowSouth()
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
     screenGrid = hs.grid.getGridFrame(fwin:screen())
-    shrinkSouthWindows(fwin)
-    hs.grid.set(fwin, generate_new_cell(cell.x, cell.y, cell.w, cell.h + 1))
+    clearAdjacentWindows("south")
+    hs.grid.set(fwin, generateNewCell(cell.x, cell.y, cell.w, cell.h + 1))
 end
 
-function generate_new_cell(x, y, w, h)
+function generateNewCell(x, y, w, h)
     screen = hs.window.focusedWindow():screen()
     screen_grid = hs.grid.getGridFrame(screen)
     if x < 0 then x = 0 end
@@ -157,57 +157,61 @@ function generate_new_cell(x, y, w, h)
     return hs.geometry.rect(x, y, w, h)
 end
 
-function shrinkWestWindows(fWindow)
-    westWindows = fWindow:windowsToWest()
-    fWindowCell = hs.grid.get(fWindow)
-    for i, wWindow in pairs(westWindows) do
-        wWindowCell = hs.grid.get(wWindow)
-        if wWindowCell.x + wWindowCell.w >= fWindowCell.x then
-            hs.grid.adjustWindow(function(frame)
-                frame.w = math.max(fWindowCell.x - 1, 1)
-            end, wWindow)
-        end
+function clearAdjacentWindows(direction)
+    fwin = hs.window.focusedWindow()
+    cell = hs.grid.get(fwin)
+    windata = getWindowData(direction)
+    for _, win in pairs(windata.windows) do
+        windata.shrink(cell, win)
     end
 end
 
-function shrinkNorthWindows(fWindow)
-    northWindows = fWindow:windowsToNorth()
-    fWindowCell = hs.grid.get(fWindow)
-    for i, nWindow in pairs(northWindows) do
-        nWindowCell = hs.grid.get(nWindow)
-        if nWindowCell.y + nWindowCell.h >= fWindowCell.y then
-            hs.grid.adjustWindow(function(frame)
-                frame.h = math.max(fWindowCell.y - 1, 1)
-            end, nWindow)
-        end
+function getWindowData(direction)
+    fwin = hs.window.focusedWindow()
+    local window_data = {
+        west = { windows = fwin:windowsToWest(), shrink = createSpaceWest },
+        north = { windows = fwin:windowsToNorth(), shrink = createSpaceNorth },
+        east = { windows = fwin:windowsToEast(), shrink = createSpaceEast },
+        south = { windows = fwin:windowsToSouth(), shrink = createSpaceSouth }
+    }
+
+    return window_data[direction]
+end
+
+function createSpaceWest(focus_cell, adjacent_win)
+    adjacent_cell = hs.grid.get(adjacent_win)
+    if adjacent_cell.x + adjacent_cell.w >= focus_cell.x then
+        hs.grid.adjustWindow(function(newcell)
+            newcell.w = adjacent_cell.w > 1 and adjacent_cell.w - 1 or 0
+        end, adjacent_win)
     end
 end
 
-function shrinkEastWindows(fWindow)
-    eastWindows = fWindow:windowsToEast()
-    fWindowCell = hs.grid.get(fWindow)
-    for i, eWindow in pairs(eastWindows) do
-        eWindowCell = hs.grid.get(eWindow)
-        if eWindowCell.x <= fWindowCell.x + fWindowCell.w then
-            hs.grid.adjustWindow(function(frame)
-                frame.x = math.max(fWindowCell.x + fWindowCell.w + 1, frame.x + 1)
-                frame.w = math.max(frame.w - 1, 1)
-            end, eWindow)
-        end
+function createSpaceNorth(focus_cell, adjacent_win)
+    adjacent_cell = hs.grid.get(adjacent_win)
+    if adjacent_cell.y + adjacent_cell.h >= focus_cell.y then
+        hs.grid.adjustWindow(function(frame)
+            frame.h = math.max(focus_cell.y - 1, 1)
+        end, adjacent_win)
     end
 end
 
-function shrinkSouthWindows(fWindow)
-    southWindows = fWindow:windowsToSouth()
-    fWindowCell = hs.grid.get(fWindow)
-    for i, sWindow in pairs(southWindows) do
-        sWindowCell = hs.grid.get(sWindow)
-        if sWindowCell.y <= fWindowCell.y + fWindowCell.h then
-            hs.grid.adjustWindow(function(frame)
-                frame.y = math.max(fWindowCell.y + fWindowCell.h + 1, frame.y + 1)
-                frame.h = math.max(frame.h - 1, 1)
-            end, sWindow)
-        end
+function createSpaceEast(focus_cell, adjacent_win)
+    adjacent_cell = hs.grid.get(adjacent_win)
+    if adjacent_cell.x <= focus_cell.x + focus_cell.w then
+        hs.grid.adjustWindow(function(frame)
+            frame.x = math.max(focus_cell.x + focus_cell.w + 1, frame.x + 1)
+            frame.w = math.max(frame.w - 1, 1)
+        end, adjacent_win)
+    end
+end
+function createSpaceSouth(focus_cell, adjacent_win)
+    adjacent_cell = hs.grid.get(adjacent_win)
+    if adjacent_cell.y <= focus_cell.y + focus_cell.h then
+        hs.grid.adjustWindow(function(frame)
+            frame.y = math.max(focus_cell.y + focus_cell.h + 1, frame.y + 1)
+            frame.h = math.max(frame.h - 1, 1)
+        end, sWindow)
     end
 end
 
