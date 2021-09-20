@@ -1,4 +1,4 @@
-local WindowManager = require('WindowManager')
+local windowmanager = require('windowmanager')
 
 -- Automatic reloading of hammerspoon config on change
 function reloadConfig(files)
