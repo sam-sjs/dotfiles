@@ -6,17 +6,17 @@ hs.grid.setGrid(gridwidth..'x'..gridheight)
 hs.grid.setMargins('0, 0')
 
 local gridPosition = {
-    leftHalf = { x = 0, y = 0, w = gridwidth / 2, h = gridHeight },
-    leftQuarter = { x = 0, y = 0, w = gridwidth / 4, h = gridHeight },
-    leftThird = { x = 0, y = 0, w = gridwidth / 3, h = gridHeight },
-    leftTwoThirds = { x = 0, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
-    midHalf = { x = gridwidth / 4, y = 0, w = gridwidth / 2, h = gridHeight },
-    midThird = { x = gridwidth / 3, y = 0, w = gridwidth / 3, h = gridHeight },
-    midTwoThirds = { x = gridwidth / 6, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
-    rightHalf = { x = gridwidth / 2, y = 0, w = gridwidth / 2, h = gridHeight },
-    rightQuarter = { x = gridwidth * 3 / 4, y = 0, w = gridwidth / 4, h = gridHeight },
-    rightThird = { x = gridwidth * 2 / 3, y = 0, w = gridwidth / 3, h = gridHeight },
-    rightTwoThirds = { x = gridwidth / 3, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
+    leftHalf = { x = 0, y = 0, w = gridwidth / 2, h = gridheight },
+    leftQuarter = { x = 0, y = 0, w = gridwidth / 4, h = gridheight },
+    leftThird = { x = 0, y = 0, w = gridwidth / 3, h = gridheight },
+    leftTwoThirds = { x = 0, y = 0, w = gridwidth * 2 / 3, h = gridheight },
+    midHalf = { x = gridwidth / 4, y = 0, w = gridwidth / 2, h = gridheight },
+    midThird = { x = gridwidth / 3, y = 0, w = gridwidth / 3, h = gridheight },
+    midTwoThirds = { x = gridwidth / 6, y = 0, w = gridwidth * 2 / 3, h = gridheight },
+    rightHalf = { x = gridwidth / 2, y = 0, w = gridwidth / 2, h = gridheight },
+    rightQuarter = { x = gridwidth * 3 / 4, y = 0, w = gridwidth / 4, h = gridheight },
+    rightThird = { x = gridwidth * 2 / 3, y = 0, w = gridwidth / 3, h = gridheight },
+    rightTwoThirds = { x = gridwidth / 3, y = 0, w = gridwidth * 2 / 3, h = gridheight },
     topLeftSixth = { x = 0, y = 0, w = gridwidth / 3, h = gridheight / 2 },
     topLeftTwoSixths = { x = 0, y = 0, w = gridwidth * 2 / 3, h = gridheight / 2 },
     topMidSixth = { x = gridwidth / 3, y = 0, w = gridwidth / 3, h = gridheight / 2 },
@@ -93,7 +93,7 @@ end
 function createSpaceWest(focus_cell, adjacent_win)
     adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.x + adjacent_cell.w >= focus_cell.x then
-        hs.grid.adjustWindow(function(newcell) -- Use consistent variable naming for these functions
+        hs.grid.adjustWindow(function(newcell)
             newcell.w = adjacent_cell.w > 1 and adjacent_cell.w - 1 or 0
         end, adjacent_win)
     end
@@ -102,8 +102,8 @@ end
 function createSpaceNorth(focus_cell, adjacent_win)
     adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.y + adjacent_cell.h >= focus_cell.y then
-        hs.grid.adjustWindow(function(frame)
-            frame.h = math.max(focus_cell.y - 1, 1)
+        hs.grid.adjustWindow(function(newcell)
+            newcell.h = math.max(focus_cell.y - 1, 1)
         end, adjacent_win)
     end
 end
@@ -111,9 +111,9 @@ end
 function createSpaceEast(focus_cell, adjacent_win)
     adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.x <= focus_cell.x + focus_cell.w then
-        hs.grid.adjustWindow(function(frame)
-            frame.x = math.max(focus_cell.x + focus_cell.w + 1, frame.x + 1)
-            frame.w = math.max(frame.w - 1, 1)
+        hs.grid.adjustWindow(function(newcell)
+            newcell.x = math.max(focus_cell.x + focus_cell.w + 1, newcell.x + 1)
+            newcell.w = math.max(newcell.w - 1, 1)
         end, adjacent_win)
     end
 end
@@ -121,9 +121,9 @@ end
 function createSpaceSouth(focus_cell, adjacent_win)
     adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.y <= focus_cell.y + focus_cell.h then
-        hs.grid.adjustWindow(function(frame)
-            frame.y = math.max(focus_cell.y + focus_cell.h + 1, frame.y + 1)
-            frame.h = math.max(frame.h - 1, 1)
+        hs.grid.adjustWindow(function(newcell)
+            newcell.y = math.max(focus_cell.y + focus_cell.h + 1, newcell.y + 1)
+            newcell.h = math.max(newcell.h - 1, 1)
         end, adjacent_win)
     end
 end
