@@ -1,51 +1,42 @@
 local hyperKey = {"cmd", "alt", "ctrl"}
-local gridWidth = 24
-local gridHeight = 12
-local top = 0
-local left = 0
-local thirdWidth = gridWidth / 3
-local twoThirdsWidth = gridWidth * 2 / 3
-local sixthWidth = gridWidth / 6
-local halfHeight = gridHeight / 2
-local halfWidth = gridWidth / 2
-local quarterWidth = gridWidth / 4
-local threeQuarterWidth = gridWidth * 3 / 4
+local gridwidth = 24
+local gridheight = 12
 
-hs.grid.setGrid(gridWidth..'x'..gridHeight)
+hs.grid.setGrid(gridwidth..'x'..gridheight)
 hs.grid.setMargins('0, 0')
 
 local gridPosition = {
-    leftHalf = { x = left, y = top, w = halfWidth, h = gridHeight },
-    leftQuarter = { x = left, y = top, w = quarterWidth, h = gridHeight },
-    leftThird = { x = left, y = top, w = thirdWidth, h = gridHeight },
-    leftTwoThirds = { x = left, y = top, w = twoThirdsWidth, h = gridHeight },
-    midHalf = { x = quarterWidth, y = top, w = halfWidth, h = gridHeight },
-    midThird = { x = thirdWidth, y = top, w = thirdWidth, h = gridHeight },
-    midTwoThirds = { x = sixthWidth, y = top, w = twoThirdsWidth, h = gridHeight },
-    rightHalf = { x = halfWidth, y = top, w = halfWidth, h = gridHeight },
-    rightQuarter = { x = threeQuarterWidth, y = top, w = quarterWidth, h = gridHeight },
-    rightThird = { x = twoThirdsWidth, y = top, w = thirdWidth, h = gridHeight },
-    rightTwoThirds = { x = thirdWidth, y = top, w = twoThirdsWidth, h = gridHeight },
-    topLeftSixth = { x = left, y = top, w = thirdWidth, h = halfHeight },
-    topLeftTwoSixths = { x = left, y = top, w = twoThirdsWidth, h = halfHeight },
-    topMidSixth = { x = thirdWidth, y = top, w = thirdWidth, h = halfHeight },
-    topMidTwoSixths = { x = sixthWidth, y = top, w = twoThirdsWidth, h = halfHeight },
-    topRightSixth = { x = twoThirdsWidth, y = top, w = thirdWidth, h = halfHeight },
-    topRightTwoSixths = { x = thirdWidth, y = top, w = twoThirdsWidth, h = halfHeight },
-    botLeftSixth = { x = left, y = halfHeight, w = thirdWidth, h = halfHeight },
-    botLeftTwoSixths = { x = left, y = halfHeight, w = twoThirdsWidth, h = halfHeight },
-    botMidSixth = { x = thirdWidth, y = halfHeight, w = thirdWidth, h = halfHeight },
-    botMidTwoSixths = { x = sixthWidth, y = halfHeight, w = twoThirdsWidth, h = halfHeight },
-    botRightSixth = { x = twoThirdsWidth, y = halfHeight, w = thirdWidth, h = halfHeight },
-    botRightTwoSixths = { x = thirdWidth, y = halfHeight, w = twoThirdsWidth, h = halfHeight },
-    topLeftQuarter = { x = left, y = top, w = halfWidth, h = halfHeight },
-    topRightQuarter = { x = halfWidth, y = top, w = halfWidth, h = halfHeight },
-    botLeftQuarter = { x = left, y = halfHeight, w = halfWidth, h = halfHeight },
-    botRightQuarter = { x = halfWidth, y = halfHeight, w = halfWidth, h = halfHeight },
-    topLeftEighth = { x = left, y = top, w = quarterWidth, h = halfHeight },
-    topRightEighth = { x = threeQuarterWidth, y = top, w = quarterWidth, h = halfHeight },
-    botLeftEighth = { x = left, y = halfHeight, w = quarterWidth, h = halfHeight },
-    botRightEighth = { x = threeQuarterWidth, y = halfHeight, w = thirdWidth, h = halfHeight }
+    leftHalf = { x = 0, y = 0, w = gridwidth / 2, h = gridHeight },
+    leftQuarter = { x = 0, y = 0, w = gridwidth / 4, h = gridHeight },
+    leftThird = { x = 0, y = 0, w = gridwidth / 3, h = gridHeight },
+    leftTwoThirds = { x = 0, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
+    midHalf = { x = gridwidth / 4, y = 0, w = gridwidth / 2, h = gridHeight },
+    midThird = { x = gridwidth / 3, y = 0, w = gridwidth / 3, h = gridHeight },
+    midTwoThirds = { x = gridwidth / 6, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
+    rightHalf = { x = gridwidth / 2, y = 0, w = gridwidth / 2, h = gridHeight },
+    rightQuarter = { x = gridwidth * 3 / 4, y = 0, w = gridwidth / 4, h = gridHeight },
+    rightThird = { x = gridwidth * 2 / 3, y = 0, w = gridwidth / 3, h = gridHeight },
+    rightTwoThirds = { x = gridwidth / 3, y = 0, w = gridwidth * 2 / 3, h = gridHeight },
+    topLeftSixth = { x = 0, y = 0, w = gridwidth / 3, h = gridheight / 2 },
+    topLeftTwoSixths = { x = 0, y = 0, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    topMidSixth = { x = gridwidth / 3, y = 0, w = gridwidth / 3, h = gridheight / 2 },
+    topMidTwoSixths = { x = gridwidth / 6, y = 0, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    topRightSixth = { x = gridwidth * 2 / 3, y = 0, w = gridwidth / 3, h = gridheight / 2 },
+    topRightTwoSixths = { x = gridwidth / 3, y = 0, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    botLeftSixth = { x = 0, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 },
+    botLeftTwoSixths = { x = 0, y = gridheight / 2, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    botMidSixth = { x = gridwidth / 3, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 },
+    botMidTwoSixths = { x = gridwidth / 6, y = gridheight / 2, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    botRightSixth = { x = gridwidth * 2 / 3, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 },
+    botRightTwoSixths = { x = gridwidth / 3, y = gridheight / 2, w = gridwidth * 2 / 3, h = gridheight / 2 },
+    topLeftQuarter = { x = 0, y = 0, w = gridwidth / 2, h = gridheight / 2 },
+    topRightQuarter = { x = gridwidth / 2, y = 0, w = gridwidth / 2, h = gridheight / 2 },
+    botLeftQuarter = { x = 0, y = gridheight / 2, w = gridwidth / 2, h = gridheight / 2 },
+    botRightQuarter = { x = gridwidth / 2, y = gridheight / 2, w = gridwidth / 2, h = gridheight / 2 },
+    topLeftEighth = { x = 0, y = 0, w = gridwidth / 4, h = gridheight / 2 },
+    topRightEighth = { x = gridwidth * 3 / 4, y = 0, w = gridwidth / 4, h = gridheight / 2 },
+    botLeftEighth = { x = 0, y = gridheight / 2, w = gridwidth / 4, h = gridheight / 2 },
+    botRightEighth = { x = gridwidth * 3 / 4, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 }
 }
 
 function moveFocusedWindow(cellDimensions)
@@ -58,16 +49,16 @@ function expandWindow(direction)
     fwin = hs.window.focusedWindow()
     cell = hs.grid.get(fwin)
     grow_directions = {
-        west = generateNewCell(cell.x - 1, cell.y, cell.w + 1, cell.h),
-        north = generateNewCell(cell.x, cell.y - 1, cell.w, cell.h + 1),
-        east = generateNewCell(cell.x, cell.y, cell.w + 1, cell.h),
-        south = generateNewCell(cell.x, cell.y, cell.w, cell.h + 1)
+        west = generateCellWithinScreen(cell.x - 1, cell.y, cell.w + 1, cell.h),
+        north = generateCellWithinScreen(cell.x, cell.y - 1, cell.w, cell.h + 1),
+        east = generateCellWithinScreen(cell.x, cell.y, cell.w + 1, cell.h),
+        south = generateCellWithinScreen(cell.x, cell.y, cell.w, cell.h + 1)
     }
     clearAdjacentWindows(direction)
     hs.grid.set(fwin, grow_directions[direction])
 end
 
-function generateNewCell(x, y, w, h) -- Consider renaming this function
+function generateCellWithinScreen(x, y, w, h)
     screen = hs.window.focusedWindow():screen()
     screen_grid = hs.grid.getGridFrame(screen)
     if x < 0 then x = 0 end
@@ -180,15 +171,15 @@ hs.hotkey.bind(hyperKey, "O", function()
 end)
 
 hs.hotkey.bind(hyperKey, "M", function()
-    moveFocusedWindow({gridPosition.bottomLeftSixth, gridPosition.bottomLeftTwoSixths})
+    moveFocusedWindow({gridPosition.botLeftSixth, gridPosition.botLeftTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, ",", function()
-    moveFocusedWindow({gridPosition.bottomMidSixth, gridPosition.bottomMidTwoSixths})
+    moveFocusedWindow({gridPosition.botMidSixth, gridPosition.botMidTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, ".", function()
-    moveFocusedWindow({gridPosition.bottomRightSixth, gridPosition.bottomRightTwoSixths})
+    moveFocusedWindow({gridPosition.botRightSixth, gridPosition.botRightTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, "Y", function()
@@ -200,11 +191,11 @@ hs.hotkey.bind(hyperKey, "P", function()
 end)
 
 hs.hotkey.bind(hyperKey, "N", function()
-    moveFocusedWindow({gridPosition.bottomLeftQuarter, gridPosition.bottomLeftEighth})
+    moveFocusedWindow({gridPosition.botLeftQuarter, gridPosition.botLeftEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "/", function()
-    moveFocusedWindow({gridPosition.bottomRightQuarter, gridPosition.bottomRightEighth})
+    moveFocusedWindow({gridPosition.botRightQuarter, gridPosition.botRightEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "H", function()
