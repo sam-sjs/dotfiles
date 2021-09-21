@@ -36,7 +36,8 @@ local gridPosition = {
     topLeftEighth = { x = 0, y = 0, w = gridwidth / 4, h = gridheight / 2 },
     topRightEighth = { x = gridwidth * 3 / 4, y = 0, w = gridwidth / 4, h = gridheight / 2 },
     botLeftEighth = { x = 0, y = gridheight / 2, w = gridwidth / 4, h = gridheight / 2 },
-    botRightEighth = { x = gridwidth * 3 / 4, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 }
+    botRightEighth = { x = gridwidth * 3 / 4, y = gridheight / 2, w = gridwidth / 3, h = gridheight / 2 },
+    innerFull = { x = 0, y = 0, w = gridwidth, h = gridheight }
 }
 
 function moveFocusedWindow(cellDimensions)
@@ -220,4 +221,8 @@ end)
 
 hs.hotkey.bind(hyperKey, "down", function()
     expandWindow("south")
+end)
+
+hs.hotkey.bind(hyperKey, "return", function()
+    moveFocusedWindow({ gridPosition.innerFull })
 end)
