@@ -101,3 +101,35 @@ require'nvim-treesitter.configs'.setup {
 	highlight = { enable = true }
 }
 EOF
+
+" Statusline
+set laststatus=2
+let g:currentmode={
+    \ 'n' : 'NORMAL',
+    \ 'v' : 'VISUAL',
+    \ 'V' : 'V-Line',
+    \ "\<C-V>" : 'V-Block',
+    \ 'i' : 'INSERT',
+    \ 'R' : 'R ',
+    \ 'Rv' : 'V-Replace',
+    \ 'c' : 'Command',
+    \}
+
+function! StatuslineGit()
+    let l:branchname=GitBranch()
+    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set statusline=
+" show current mode
+set statusline+=\ %{toupper(g:currentmode[mode()])}
+" show git branch
+set statusline+=%{StatuslineGit()}
+" show full file path
+set statusline+=%F
+" show current line number
+set statusline+=%l
+" show current file has been modified
+set statusline+=%{&modified?'[+]':''}
+" show fileformal (min 7 width)
+set statusline+=%-7([%{&fileformat}]%)
