@@ -113,23 +113,27 @@ let g:currentmode={
     \ 'R' : 'R ',
     \ 'Rv' : 'V-Replace',
     \ 'c' : 'Command',
+    \ 't' : 'Terminal'
     \}
 
-function! StatuslineGit()
-    let l:branchname=GitBranch()
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
 set statusline=
-" show current mode
+" wrap to here
+set statusline+=%<
+"" show current mode
 set statusline+=\ %{toupper(g:currentmode[mode()])}
-" show git branch
-set statusline+=%{StatuslineGit()}
-" show full file path
-set statusline+=%F
-" show current line number
-set statusline+=%l
-" show current file has been modified
-set statusline+=%{&modified?'[+]':''}
-" show fileformal (min 7 width)
-set statusline+=%-7([%{&fileformat}]%)
+"" show full file path
+"set statusline+='%F\ '
+"" show help flag
+"set statusline+=%h
+"" show modified flag
+"set statusline+=%m
+"" show readonly flag
+"set statusline+=%r
+"" show current line number
+"set statusline+=%l
+"" expand whitespace evenly
+"set statusline+=%=
+" left align
+"set statusline+=%-
+"" show fileformal (min 7 width)
+"set statusline+=%-7([%{&fileformat}]%)
