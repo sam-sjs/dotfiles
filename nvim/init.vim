@@ -117,23 +117,16 @@ let g:currentmode={
     \}
 
 set statusline=
-" wrap to here
-set statusline+=%<
-"" show current mode
-set statusline+=\ %{toupper(g:currentmode[mode()])}
-"" show full file path
-"set statusline+='%F\ '
-"" show help flag
-"set statusline+=%h
-"" show modified flag
-"set statusline+=%m
-"" show readonly flag
-"set statusline+=%r
-"" show current line number
-"set statusline+=%l
-"" expand whitespace evenly
-"set statusline+=%=
-" left align
-"set statusline+=%-
-"" show fileformal (min 7 width)
-"set statusline+=%-7([%{&fileformat}]%)
+set statusline+=%<      " wrap to here
+"set statusline+=\ %{toupper(g:currentmode[mode()])}
+set statusline+=%f      " show relative file path
+set statusline+=\       " space
+set statusline+=%h      " show help flag
+set statusline+=%m      " show modified flag
+set statusline+=%r      " show readonly flag
+set statusline+=%=      " expand whitespace evenly
+set statusline+=%y      " show filetype
+set statusline+=\       " space
+set statusline+=%l      " show line number
+set statusline+=,       " literal comma
+set statusline+=%c      " show column number
