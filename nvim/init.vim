@@ -33,6 +33,8 @@ Plug 'SirVer/ultisnips'
     let g:UltiSnipsJumpForwardTrigger='<c-j>'
     let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 Plug 'honza/vim-snippets'
+Plug 'preservim/nerdtree'
+    nnoremap <F3> :NERDTreeToggle<CR>
 call plug#end()
 
 if plug_install
@@ -96,8 +98,12 @@ inoremap [, [<CR>],<C-c>O
 " Treesitter modules
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "javascript", "typescript", "tsx", "bash", "python", "c",
-                         "lua", "c_sharp", "html", "css", "dockerfile", "yaml" },
+    ensure_installed = 
+    {
+        "javascript", "typescript", "tsx", "bash", "python", "c", "lua",
+        "c_sharp", "html", "css", "dockerfile", "yaml", "java", "json",
+        "kotlin", "regex", "vim"
+    },
 	highlight = { enable = true }
 }
 EOF
