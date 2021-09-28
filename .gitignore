@@ -5,3 +5,6 @@
 .netrwhist  # Network oriented reading, writeing, browsing
 *.swp   # Swap file
 *.swo   # Swap file
+
+# VS Code settings file
+.vscode
