@@ -110,3 +110,5 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias luamake=/Users/sam/.config/nvim/lua-language-server/3rd/luamake/luamake

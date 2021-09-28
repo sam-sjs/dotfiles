@@ -42,15 +42,6 @@ if plug_install
 endif
 unlet plug_install
 
-lua <<EOF
-require'lspinstall'.setup()
-
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
-end
-EOF
-
 " Themeing
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -136,3 +127,37 @@ set statusline+=\       " space
 set statusline+=%l      " show line number
 set statusline+=,       " literal comma
 set statusline+=%c      " show column number
+
+" LSP Server
+lua <<EOF
+require'lspinstall'.setup()
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+EOF
+
+"sumneko lua config
+lua <<EOF
+local sumneko_root_path = "/Users/sam/.config/nvim/lua-language-server"
+local sumneko_binary = "/Users/sam/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
+
+require 'lspconfig'.sumneko_lua.setup {
+    cmd = { sumneko_binary, "-E", sumneko_root_path.."/main.lua" },
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+                path = vim.split(package.path, ';')
+            },
+            diagnostics = {
+                globals = {'vim'}
+            },
+            workspace = {
+                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+            }
+        }
+    }
+}
+EOF
