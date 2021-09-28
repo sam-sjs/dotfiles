@@ -1,8 +1,9 @@
 ZSH_DISABLE_COMPFIX=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-alias vim="nvim"
+alias vim='nvim'
 alias vimdiff='nvim -d'
+alias pip='pip3'
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
