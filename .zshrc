@@ -112,3 +112,4 @@ source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highli
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias luamake=/Users/sam/.config/nvim/lua-language-server/3rd/luamake/luamake
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
