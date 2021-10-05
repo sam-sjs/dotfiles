@@ -35,6 +35,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'preservim/nerdtree'
     nnoremap <F3> :NERDTreeToggle<CR>
+Plug 'knubie/vim-kitty-navigator', { 'do': 'cp ./*.py ~/.config/kitty/' }
 call plug#end()
 
 if plug_install
@@ -73,10 +74,6 @@ colorscheme flattened_light
 " Key mappings
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
 nnoremap Y y$
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-l> :wincmd l<CR>
 
 " Auto expanding
 inoremap (; (<CR>);<C-c>O
