@@ -12,14 +12,8 @@ full_install=false
 # Set runtime options
 for arg in "$@"
 do
-    case "$arg" in
-        "--help" | "-h")
-            helpme=true
-            ;;
-        "--full" | "-f")
-            full_install=true
-            ;;
-    esac
+    if [[ $arg = "--help" ]] || [[ $arg =~ ^-[^-]*h.*$ ]]; then helpme=true; fi
+    if [[ $arg = "--full" ]] || [[ $arg =~ ^-[^-]*f.*$ ]]; then full_install=true; fi
 done
 
 if [ "$helpme" == true ]; then
