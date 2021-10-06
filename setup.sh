@@ -63,8 +63,16 @@ brew_setup() {
     fi
 }
 
-    # Setup SDKMAN
-    curl -s "https://get.sdkman.io" | bash
+sdkman_setup() {
+    if [[ "$full_install" = true ]]; then
+        if [[ !$(which sdk) ]]; then
+            curl -s "https://get.sdkman.io" | bash
+        fi
+
+    if [[ "$update" = true ]]; then
+        sdk selfupdate
+    fi
+}
 
     # Install OMZ
     if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
