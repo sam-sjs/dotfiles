@@ -21,8 +21,9 @@ do
 done
 
 if [ "$helpme" = true ]; then
-    echo "  --help [-h] Display this help message (congrats on making it this far!)"
-    echo "  --full [-f] Perform full install"
+    echo "  --help   [-h] Display this help message (congrats on making it this far!)"
+    echo "  --full   [-f] Perform full install"
+    echo "  --update [-u] Update all setup packages"
     exit 0
 fi
 
