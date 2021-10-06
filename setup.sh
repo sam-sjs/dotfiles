@@ -49,19 +49,19 @@ brew_setup() {
         packages=(git nvim fzf python)
         echo "Installing packages..."
         brew install ${packages[@]}
+
+        # Setup fzf
+        /usr/local/opt/fzf/install --all
+
+        # Setup python3 for nvim
+        python3 -m pip install --user pynvim
     fi
 
     if [[ "$update" = true ]]; then
-        # Update homebrew recipes
         brew update
+        python3 -m pip install --user --uprade pynvim
     fi
 }
-
-    # Setup python3 for nvim
-    python3 -m pip install --user --uprade pynvim
-
-    # Setup fzf
-    /usr/local/opt/fzf/install --all
 
     # Setup SDKMAN
     curl -s "https://get.sdkman.io" | bash
