@@ -8,6 +8,7 @@
 # Runtime flags
 helpme=false
 full_install=false
+update=false
 
 base_dir=$HOME/.dotfiles
 
@@ -16,16 +17,17 @@ for arg in "$@"
 do
     if [[ $arg = "--help" ]] || [[ $arg =~ ^-[^-]*h.*$ ]]; then helpme=true; fi
     if [[ $arg = "--full" ]] || [[ $arg =~ ^-[^-]*f.*$ ]]; then full_install=true; fi
+    if [[ $arg = "--update" ]] || [[ $arg =~ ^-[^-]*u.*$ ]]; then update=true; fi
 done
 
-if [ "$helpme" == true ]; then
+if [ "$helpme" = true ]; then
     echo "  --help [-h] Display this help message (congrats on making it this far!)"
     echo "  --full [-f] Perform full install"
     exit 0
 fi
 
 brew_setup() {
-    if [[ "$full_install" == true ]]; then
+    if [[ "$full_install" = true ]]; then
         # Install Homebrew
         if [ ! $(which brew) ]; then
             echo "Installing homebrew..."
