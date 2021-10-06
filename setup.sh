@@ -9,6 +9,8 @@
 helpme=false
 full_install=false
 
+base_dir=$HOME/.dotfiles
+
 # Set runtime options
 for arg in "$@"
 do
@@ -21,8 +23,6 @@ if [ "$helpme" == true ]; then
     echo "  --full [-f] Perform full install"
     exit 0
 fi
-
-base_dir=$HOME/.dotfiles
 
 if [ "$full_install" == true ]; then
     # Install Homebrew
