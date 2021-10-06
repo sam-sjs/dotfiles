@@ -1514,6 +1514,6 @@ macos_option_as_alt both
 
 
 # BEGIN_KITTY_THEME
-# Solarized Dark
+# Solarized Flattened Light
 include current-theme.conf
 # END_KITTY_THEME
