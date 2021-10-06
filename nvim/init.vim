@@ -69,6 +69,7 @@ set shiftwidth=4		" Amount of whitespace to add or remove
 set softtabstop=4		" Fine tunes whitespace inserted
 set expandtab			" Insert spaces instead of tabs
 set lazyredraw
+set notimeout           " Stop vim from waiting to complete key sequences
 colorscheme flattened_light
 
 " Key mappings

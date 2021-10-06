@@ -24,25 +24,35 @@ if [ "$helpme" == true ]; then
     exit 0
 fi
 
-if [ "$full_install" == true ]; then
-    # Install Homebrew
-    if [ ! $(which brew) ]; then
-        echo "Installing homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew_setup() {
+    if [[ "$full_install" == true ]]; then
+        # Install Homebrew
+        if [ ! $(which brew) ]; then
+            echo "Installing homebrew..."
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        fi
+
+        # Tap brew kegs
+        kegs=(homebrew/cask-fonts)
+        echo "Tapping kegs..."
+        brew tap ${kegs[@]}
+
+        # Install brew casks
+        casks=(kitty hammerspoon font-iosevka)
+        echo "Installing casks..."
+        brew install --cask ${casks[@]}
+
+        # Install brew packages
+        packages=(git nvim fzf python)
+        echo "Installing packages..."
+        brew install ${packages[@]}
     fi
 
-    # Update homebrew recipes
-    brew update
-
-    # Tap brew kegs
-    kegs=(homebrew/cask-fonts)
-    echo "Tapping kegs..."
-    brew tap ${kegs[@]}
-
-    # Install brew packages
-    packages=(git nvim fzf python)
-    echo "Installing packages..."
-    brew install ${packages[@]}
+    if [[ "$update" = true ]]; then
+        # Update homebrew recipes
+        brew update
+    fi
+}
 
     # Setup python3 for nvim
     python3 -m pip install --user --uprade pynvim
@@ -50,10 +60,8 @@ if [ "$full_install" == true ]; then
     # Setup fzf
     /usr/local/opt/fzf/install --all
 
-    # Install brew casks
-    casks=(kitty hammerspoon font-iosevka)
-    echo "Installing casks..."
-    brew install --cask ${casks[@]}
+    # Setup SDKMAN
+    curl -s "https://get.sdkman.io" | bash
 
     # Install OMZ
     if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
@@ -68,7 +76,6 @@ if [ "$full_install" == true ]; then
     if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
         wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
     fi
-fi
 
 #Symlink configs
 mkdir -p $HOME/.config/nvim
