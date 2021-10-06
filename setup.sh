@@ -20,7 +20,7 @@ do
     if [[ $arg = "--update" ]] || [[ $arg =~ ^-[^-]*u.*$ ]]; then update=true; fi
 done
 
-if [ "$helpme" = true ]; then
+if [[ "$helpme" = true ]]; then
     echo "  --help   [-h] Display this help message (congrats on making it this far!)"
     echo "  --full   [-f] Perform full install"
     echo "  --update [-u] Update all setup packages"
@@ -30,7 +30,7 @@ fi
 brew_setup() {
     if [[ "$full_install" = true ]]; then
         # Install Homebrew
-        if [ ! $(which brew) ]; then
+        if [[ ! $(which brew) ]]; then
             echo "Installing homebrew..."
             ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         fi
