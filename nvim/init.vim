@@ -70,7 +70,7 @@ set softtabstop=4		" Fine tunes whitespace inserted
 set expandtab			" Insert spaces instead of tabs
 set lazyredraw
 set timeoutlen=450
-colorscheme flattened_light
+colorscheme flattened_dark
 
 " Key mappings
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>

@@ -51,7 +51,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python)
+        packages=(git nvim fzf python fd)
         brew install ${packages[@]}
 
         # Setup fzf
@@ -76,7 +76,7 @@ brew_setup() {
 
 sdkman_setup() {
     if [[ "$full_install" = true ]]; then
-        if [[ !$(which sdk) ]]; then
+        if ! command -v sdk &> /dev/null; then # This is the proper way but not working, see https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
             echo "Installing SDKMAN..."
             curl -s "https://get.sdkman.io" | bash
         fi

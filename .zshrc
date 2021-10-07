@@ -4,7 +4,9 @@ export EDITOR="$VISUAL"
 alias vim='nvim'
 alias vimdiff='nvim -d'
 alias pip='pip3'
-
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden'
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
