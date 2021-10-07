@@ -27,27 +27,31 @@ if [[ "$helpme" = true ]]; then
     exit 0
 fi
 
+link_nvim() {
+    mkdir -p $HOME/.config/nvim
+    ln -sf $base_dir/nvim/autoload/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/colors/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/ftplugin/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/init.vim $HOME/.config/nvim
+}
+
 brew_setup() {
     if [[ "$full_install" = true ]]; then
-        # Install Homebrew
         if [[ ! $(which brew) ]]; then
             echo "Installing homebrew..."
             ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         fi
 
-        # Tap brew kegs
-        kegs=(homebrew/cask-fonts)
         echo "Tapping kegs..."
+        kegs=(homebrew/cask-fonts)
         brew tap ${kegs[@]}
 
-        # Install brew casks
-        casks=(kitty hammerspoon font-iosevka)
         echo "Installing casks..."
+        casks=(kitty hammerspoon font-iosevka)
         brew install --cask ${casks[@]}
 
-        # Install brew packages
+        echo "Installing brew packages..."
         packages=(git nvim fzf python)
-        echo "Installing packages..."
         brew install ${packages[@]}
 
         # Setup fzf
@@ -55,45 +59,60 @@ brew_setup() {
 
         # Setup python3 for nvim
         python3 -m pip install --user pynvim
+        
+        # Setup nvim
+        link_nvim
+        vim +'PlugInstall --sync' +qa
     fi
 
     if [[ "$update" = true ]]; then
         brew update
         python3 -m pip install --user --uprade pynvim
     fi
+
+    ln -sf $base_dir/.hammerspoon $HOME
+    link_nvim
 }
 
 sdkman_setup() {
     if [[ "$full_install" = true ]]; then
         if [[ !$(which sdk) ]]; then
+            echo "Installing SDKMAN..."
             curl -s "https://get.sdkman.io" | bash
         fi
+    fi
 
     if [[ "$update" = true ]]; then
         sdk selfupdate
     fi
 }
 
-    # Install OMZ
-    if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-        rm $HOME/.zshrc
-    fi
+omz_setup() {
+    if [[ "$full_install" = true ]]; then
+        if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
+            echo "Installing Oh My Zsh!..."
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+            rm $HOME/.zshrc
+        fi
 
-    # Install OMZ plugins
-    if [ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        # Install OMZ plugins
+        if [ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        fi
+        if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
+            wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+        fi
     fi
-    if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
-        wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
+    
+    if [[ "$update" = true ]]; then
+        omz update
     fi
+}
+
+brew_setup
+sdkman_setup
+omz_setup
 
 #Symlink configs
-mkdir -p $HOME/.config/nvim
-ln -s $base_dir/.zshrc $HOME
-ln -s $base_dir/kitty/ $HOME/.config
-ln -s $base_dir/nvim/autoload/ $HOME/.config/nvim # For the moment can't symlink entire nvim folder as plugins subfolder causes issues with submodules.
-ln -s $base_dir/nvim/colors/ $HOME/.config/nvim
-ln -s $base_dir/nvim/ftplugin/ $HOME/.config/nvim
-ln -s $base_dir/nvim/init.vim $HOME/.config/nvim
-ln -s $base_dir/.hammerspoon $HOME
+ln -sf $base_dir/.zshrc $HOME
+ln -s $base_dir/kitty/ $HOME/.config # break up this directory to allow seperate terminal themes without having to be pushed up
