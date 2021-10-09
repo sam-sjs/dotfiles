@@ -74,16 +74,18 @@ brew_setup() {
     link_nvim
 }
 
-sdkman_setup() {
+sdk_setup() {
     if [[ "$full_install" = true ]]; then
         if ! command -v sdk &> /dev/null; then # This is the proper way but not working, see https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
             echo "Installing SDKMAN..."
             curl -s "https://get.sdkman.io" | bash
         fi
+        sdk install java
     fi
 
     if [[ "$update" = true ]]; then
         sdk selfupdate
+        sdk upgrade
     fi
 }
 
@@ -110,7 +112,7 @@ omz_setup() {
 }
 
 brew_setup
-sdkman_setup
+sdk_setup
 omz_setup
 
 #Symlink configs
