@@ -68,6 +68,7 @@ set tabstop=4			" Width of a tab
 set shiftwidth=4		" Amount of whitespace to add or remove
 set softtabstop=4		" Fine tunes whitespace inserted
 set expandtab			" Insert spaces instead of tabs
+set smartindent
 set lazyredraw
 set timeoutlen=450
 colorscheme flattened_dark
