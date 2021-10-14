@@ -51,7 +51,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep)
+        packages=(git nvim fzf python fd ripgrep maven)
         brew install ${packages[@]}
 
         # Setup fzf
