@@ -111,10 +111,19 @@ omz_setup() {
     fi
 }
 
+p10k_setup() {
+    if [[ "$full_install" = true ]]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+        echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+    fi
+}
+
 brew_setup
 sdk_setup
 omz_setup
+p10k_setup
 
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
 ln -s $base_dir/kitty/ $HOME/.config # break up this directory to allow seperate terminal themes without having to be pushed up
+ln -sf $base_dir/.p10k.zsh $HOME
