@@ -127,3 +127,5 @@ p10k_setup
 ln -sf $base_dir/.zshrc $HOME
 ln -s $base_dir/kitty/ $HOME/.config # break up this directory to allow seperate terminal themes without having to be pushed up
 ln -sf $base_dir/.p10k.zsh $HOME
+
+ln -s $base_dir/webstorm /usr/local/bin
