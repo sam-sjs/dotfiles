@@ -125,7 +125,8 @@ p10k_setup
 
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
-ln -s $base_dir/kitty/ $HOME/.config # break up this directory to allow seperate terminal themes without having to be pushed up
+mkdir -p $HOME/.config/kitty/
+ln -s $base_dir/kitty/* $HOME/.config/kitty/ # break up this directory to allow seperate terminal themes without having to be pushed up
 ln -sf $base_dir/.p10k.zsh $HOME
 
 ln -s $base_dir/webstorm /usr/local/bin
