@@ -1,1 +1,0 @@
-/Users/sam/dev/vim-kitty-navigator/pass_keys.py
