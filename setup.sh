@@ -118,10 +118,21 @@ p10k_setup() {
     fi
 }
 
+misc_setup() {
+    if [[ "$full_install" = true ]]; then
+        curl -sSL https://get.haskellstack.org/ | sh
+    fi
+
+    if [[ "$update" = true ]]; then
+        stack upgrade
+    fi
+}
+
 brew_setup
 sdk_setup
 omz_setup
 p10k_setup
+misc_setup
 
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
