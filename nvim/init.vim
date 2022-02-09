@@ -23,7 +23,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'SirVer/ultisnips'
     nnoremap <leader>se :UltiSnipsEdit<CR>
     let g:UltiSnipsSnippetsDir='~/.config/nvim/plugins/vim-snippets/UltiSnips'
@@ -128,35 +128,35 @@ set statusline+=,       " literal comma
 set statusline+=%c      " show column number
 
 " LSP Server
-lua <<EOF
-require'lspinstall'.setup()
-
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
-end
-EOF
+"lua <<EOF
+"require'lspinstall'.setup()
+"
+"local servers = require'lspinstall'.installed_servers()
+"for _, server in pairs(servers) do
+"  require'lspconfig'[server].setup{}
+"end
+"EOF
 
 "sumneko lua config
-lua <<EOF
-local sumneko_root_path = "/Users/sam/.config/nvim/lua-language-server"
-local sumneko_binary = "/Users/sam/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
-
-require 'lspconfig'.sumneko_lua.setup {
-    cmd = { sumneko_binary, "-E", sumneko_root_path.."/main.lua" },
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-                path = vim.split(package.path, ';')
-            },
-            diagnostics = {
-                globals = {'vim'}
-            },
-            workspace = {
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
-            }
-        }
-    }
-}
-EOF
+"lua <<EOF
+"local sumneko_root_path = "/Users/sam/.config/nvim/lua-language-server"
+"local sumneko_binary = "/Users/sam/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
+"
+"require 'lspconfig'.sumneko_lua.setup {
+"    cmd = { sumneko_binary, "-E", sumneko_root_path.."/main.lua" },
+"    settings = {
+"        Lua = {
+"            runtime = {
+"                version = 'LuaJIT',
+"                path = vim.split(package.path, ';')
+"            },
+"            diagnostics = {
+"                globals = {'vim'}
+"            },
+"            workspace = {
+"                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+"            }
+"        }
+"    }
+"}
+"EOF
