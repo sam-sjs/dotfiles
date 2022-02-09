@@ -14,6 +14,8 @@ alias pip='pip3'
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory --hidden . $HOME'
+# Stack (Haskell) binaries dir
+export PATH="/Users/sam/.local/bin:$PATH"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
