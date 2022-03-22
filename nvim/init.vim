@@ -36,6 +36,7 @@ Plug 'honza/vim-snippets'
 Plug 'preservim/nerdtree'
     nnoremap <F3> :NERDTreeToggle<CR>
 Plug 'knubie/vim-kitty-navigator', { 'do': 'cp ./*.py ~/.config/kitty/' }
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 if plug_install
