@@ -121,10 +121,12 @@ p10k_setup() {
 misc_setup() {
     if [[ "$full_install" = true ]]; then
         curl -sSL https://get.haskellstack.org/ | sh
+        cabal update
         cabal install dhall-lsp-server
     fi
 
     if [[ "$update" = true ]]; then
+        cabal update
         stack upgrade
     fi
 }
