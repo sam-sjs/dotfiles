@@ -37,6 +37,7 @@ Plug 'preservim/nerdtree'
     nnoremap <F3> :NERDTreeToggle<CR>
 Plug 'knubie/vim-kitty-navigator', { 'do': 'cp ./*.py ~/.config/kitty/' }
 Plug 'neovimhaskell/haskell-vim'
+Plug 'vmchale/dhall-vim'
 call plug#end()
 
 if plug_install
@@ -97,6 +98,10 @@ require'nvim-treesitter.configs'.setup {
     },
 	highlight = { enable = true }
 }
+EOF
+
+lua <<EOF
+require'lspconfig'.dhall_lsp_server.setup{}
 EOF
 
 " Statusline

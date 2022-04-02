@@ -51,7 +51,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep maven awscli)
+        packages=(git nvim fzf python fd ripgrep maven awscli cabal-install)
         brew install ${packages[@]}
 
         # Setup fzf
@@ -121,6 +121,7 @@ p10k_setup() {
 misc_setup() {
     if [[ "$full_install" = true ]]; then
         curl -sSL https://get.haskellstack.org/ | sh
+        cabal install dhall-lsp-server
     fi
 
     if [[ "$update" = true ]]; then

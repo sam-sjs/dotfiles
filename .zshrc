@@ -15,6 +15,7 @@ export FZF_ALT_C_COMMAND='fd --type directory --hidden . $HOME'
 
 # Stack (Haskell) binaries dir
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
