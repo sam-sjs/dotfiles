@@ -73,7 +73,7 @@ set expandtab			" Insert spaces instead of tabs
 set smartindent
 set lazyredraw
 set timeoutlen=450
-colorscheme flattened_light
+colorscheme onedark
 
 " Key mappings
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
