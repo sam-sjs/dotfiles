@@ -38,6 +38,7 @@ Plug 'preservim/nerdtree'
 Plug 'knubie/vim-kitty-navigator', { 'do': 'cp ./*.py ~/.config/kitty/' }
 Plug 'neovimhaskell/haskell-vim'
 Plug 'vmchale/dhall-vim'
+Plug 'LnL7/vim-nix'
 call plug#end()
 
 if plug_install
