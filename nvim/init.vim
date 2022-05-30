@@ -39,6 +39,7 @@ Plug 'knubie/vim-kitty-navigator', { 'do': 'cp ./*.py ~/.config/kitty/' }
 Plug 'neovimhaskell/haskell-vim'
 Plug 'vmchale/dhall-vim'
 Plug 'LnL7/vim-nix'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 if plug_install
