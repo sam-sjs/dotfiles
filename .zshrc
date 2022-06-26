@@ -6,12 +6,11 @@ fi
 ZSH_DISABLE_COMPFIX=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-alias vim='nvim'
-alias vimdiff='nvim -d'
-alias pip='pip3'
+alias nv='nvim'
+alias nvd='nvim -d'
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type directory --hidden . $HOME'
+export FZF_ALT_C_COMMAND='fd --type directory . $HOME'
 
 # Stack (Haskell) binaries dir
 export PATH="$HOME/.local/bin:$PATH"
@@ -19,11 +18,8 @@ export PATH="$HOME/.cabal/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 plugins=(git zsh-syntax-highlighting kubectl docker docker-compose)
-
 source $ZSH/oh-my-zsh.sh
-
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -35,13 +31,14 @@ export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #Nix
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

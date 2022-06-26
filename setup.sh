@@ -71,12 +71,8 @@ brew_setup() {
             ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         fi
 
-        echo "Tapping kegs..."
-        kegs=(homebrew/cask-fonts)
-        brew tap ${kegs[@]}
-
         echo "Installing casks..."
-        casks=(kitty hammerspoon font-iosevka)
+        casks=(kitty hammerspoon)
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
@@ -170,7 +166,7 @@ misc_setup
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
 mkdir -p $HOME/.config/kitty/
-ln -s $base_dir/kitty/* $HOME/.config/kitty/ # break up this directory to allow seperate terminal themes without having to be pushed up
+ln -sf $base_dir/kitty/* $HOME/.config/kitty/ # break up this directory to allow seperate terminal themes without having to be pushed up
 ln -sf $base_dir/.p10k.zsh $HOME
 
-ln -s $base_dir/webstorm /usr/local/bin
+ln -sf $base_dir/webstorm /usr/local/bin
