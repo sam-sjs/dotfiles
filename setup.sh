@@ -10,7 +10,7 @@ helpme=false
 full_install=false
 update=false
 
-base_dir=$HOME/.dotfiles
+base_dir=$HOME/dotfiles
 
 # Set runtime options
 for arg in "$@"
@@ -26,6 +26,35 @@ if [[ "$helpme" = true ]]; then
     echo "  --update [-u] Update all setup packages"
     exit 0
 fi
+
+install_fonts() {
+    fonts=$(fc-list)
+    iosevka=$(echo "$fonts" | grep "Iosevka" | grep -v "Term")
+    iosevka_term=$(echo "$fonts" | grep "Iosevka Term")
+    nerd_symbols=$(echo "$fonts" | grep "Symbols Nerd")
+
+    if [[ -z $iosevka ]]; then
+        echo "Installing Iosevka Font..."
+        curl -L https://github.com/be5invis/Iosevka/releases/download/v15.5.2/ttf-iosevka-15.5.2.zip > iosevka.zip
+        unzip -q -d $HOME/Library/Fonts iosevka.zip
+        rm -f iosevka.zip
+    fi
+
+    if [[ -z $iosevka_term ]]; then
+        echo "Installing Iosevka Term Font..."
+        curl -L https://github.com/be5invis/Iosevka/releases/download/v15.5.2/ttf-iosevka-term-15.5.2.zip > iosevka_term.zip
+        unzip -q -d $HOME/Library/Fonts iosevka_term.zip
+        rm -f iosevka_term.zip
+    fi
+
+    if [[ -z $nerd_symbols ]]; then
+        echo "Installing Nerd Font Symbols..."
+        curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/NerdFontsSymbolsOnly.zip > nerd_symbols.zip
+        unzip -q nerd_symbols.zip
+        mv Symbols-2048-em\ Nerd\ Font\ Complete.ttf $HOME/Library/Fonts/Symbols-2048-em\ Nerd\ Font\ Complete.ttf
+        rm -f nerd_symbols.zip Symbols* readme.md
+    fi
+}
 
 link_nvim() {
     mkdir -p $HOME/.config/nvim
@@ -131,6 +160,7 @@ misc_setup() {
     fi
 }
 
+install_fonts
 brew_setup
 sdk_setup
 omz_setup
