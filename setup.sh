@@ -27,6 +27,49 @@ if [[ "$helpme" = true ]]; then
     exit 0
 fi
 
+link_nvim() {
+    mkdir -p $HOME/.config/nvim
+    ln -sf $base_dir/nvim/autoload/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/colors/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/ftplugin/ $HOME/.config/nvim
+    ln -sf $base_dir/nvim/init.vim $HOME/.config/nvim
+}
+
+brew_setup() {
+    if [[ "$full_install" = true ]]; then
+        if [[ ! $(which brew) ]]; then
+            echo "Installing homebrew..."
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        fi
+
+        echo "Installing casks..."
+        casks=(kitty hammerspoon)
+        brew install --cask ${casks[@]}
+
+        echo "Installing brew packages..."
+        packages=(git nvim fzf python fd ripgrep maven awscli cabal-install jq fontconfig)
+        brew install ${packages[@]}
+
+        # Setup fzf
+        /usr/local/opt/fzf/install --all
+
+        # Setup python3 for nvim
+        python3 -m pip install --user pynvim
+        
+        # Setup nvim
+        link_nvim
+        vim +'PlugInstall --sync' +qa
+    fi
+
+    if [[ "$update" = true ]]; then
+        brew update
+        python3 -m pip install --user --uprade pynvim
+    fi
+
+    ln -sf $base_dir/.hammerspoon $HOME
+    link_nvim
+}
+
 install_fonts() {
     fonts=$(fc-list)
     iosevka=$(echo "$fonts" | grep "Iosevka" | grep -v "Term")
@@ -54,49 +97,6 @@ install_fonts() {
         mv Symbols-2048-em\ Nerd\ Font\ Complete.ttf $HOME/Library/Fonts/Symbols-2048-em\ Nerd\ Font\ Complete.ttf
         rm -f nerd_symbols.zip Symbols* readme.md
     fi
-}
-
-link_nvim() {
-    mkdir -p $HOME/.config/nvim
-    ln -sf $base_dir/nvim/autoload/ $HOME/.config/nvim
-    ln -sf $base_dir/nvim/colors/ $HOME/.config/nvim
-    ln -sf $base_dir/nvim/ftplugin/ $HOME/.config/nvim
-    ln -sf $base_dir/nvim/init.vim $HOME/.config/nvim
-}
-
-brew_setup() {
-    if [[ "$full_install" = true ]]; then
-        if [[ ! $(which brew) ]]; then
-            echo "Installing homebrew..."
-            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        fi
-
-        echo "Installing casks..."
-        casks=(kitty hammerspoon)
-        brew install --cask ${casks[@]}
-
-        echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep maven awscli cabal-install jq)
-        brew install ${packages[@]}
-
-        # Setup fzf
-        /usr/local/opt/fzf/install --all
-
-        # Setup python3 for nvim
-        python3 -m pip install --user pynvim
-        
-        # Setup nvim
-        link_nvim
-        vim +'PlugInstall --sync' +qa
-    fi
-
-    if [[ "$update" = true ]]; then
-        brew update
-        python3 -m pip install --user --uprade pynvim
-    fi
-
-    ln -sf $base_dir/.hammerspoon $HOME
-    link_nvim
 }
 
 sdk_setup() {
@@ -156,8 +156,8 @@ misc_setup() {
     fi
 }
 
-install_fonts
 brew_setup
+install_fonts
 sdk_setup
 omz_setup
 p10k_setup
