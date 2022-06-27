@@ -129,6 +129,9 @@ omz_setup() {
         if [ ! -f $HOME/.oh-my-zsh/custom/themes/common.zsh-theme ]; then
             wget -O $HOME/.oh-my-zsh/custom/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
         fi
+        if [[ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        fi
     fi
     
     if [[ "$update" = true ]]; then
