@@ -171,5 +171,6 @@ ln -sf $base_dir/.zshrc $HOME
 mkdir -p $HOME/.config/kitty/
 ln -sf $base_dir/kitty/* $HOME/.config/kitty/ # break up this directory to allow seperate terminal themes without having to be pushed up
 ln -sf $base_dir/.p10k.zsh $HOME
-
 ln -sf $base_dir/webstorm /usr/local/bin
+ln -sf $base_dir/idea /usr/local/bin
+ln -sf $base_dir/rider /usr/local/bin
