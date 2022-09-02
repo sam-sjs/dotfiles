@@ -47,7 +47,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep maven awscli cabal-install jq fontconfig)
+        packages=(git nvim fzf python fd ripgrep maven awscli jq fontconfig)
         brew install ${packages[@]}
 
         # Setup fzf
@@ -146,16 +146,11 @@ p10k_setup() {
     fi
 }
 
-misc_setup() {
-    if [[ "$full_install" = true ]]; then
-        curl -sSL https://get.haskellstack.org/ | sh
-        cabal update
-        cabal install dhall-lsp-server
-    fi
-
-    if [[ "$update" = true ]]; then
-        cabal update
-        stack upgrade
+haskell_setup() {
+    if [[ ! -f $HOME/.ghcup/env ]]; then
+        export BOOTSTRAP_HASKELL_NONINTERACTIVE=1
+        export BOOTSTRAP_HASKELL_INSTALL_HLS=1
+        curl https://gitlab.haskell.org/haskell/ghcup-hs/-/raw/master/scripts/bootstrap/bootstrap-haskell?inline=false | sh
     fi
 }
 
@@ -164,7 +159,7 @@ install_fonts
 sdk_setup
 omz_setup
 p10k_setup
-misc_setup
+haskell_setup
 
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
