@@ -20,7 +20,7 @@ export PATH="$HOME/.cabal/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git kubectl docker docker-compose zsh-autosuggestions zsh-syntax-highlighting zsh-nvm)
+plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting zsh-nvm)
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
 source $ZSH/oh-my-zsh.sh
 
