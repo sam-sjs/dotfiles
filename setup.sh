@@ -27,12 +27,19 @@ if [[ "$helpme" = true ]]; then
     exit 0
 fi
 
-link_nvim() {
-    mkdir -p $HOME/.config/nvim
+nvim_setup() {
+    packer_dir=~/.local/share/nvim/site/pack/packer/start
+    if [[ ! -e $packer_dir/packer.nvim ]]; then
+	mkdir -p $packer_dir
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim $packer_dir/packer.nvim
+    fi
+    mkdir -p $HOME/.config/nvim/lua
     ln -sf $base_dir/nvim/autoload/ $HOME/.config/nvim
     ln -sf $base_dir/nvim/colors/ $HOME/.config/nvim
     ln -sf $base_dir/nvim/ftplugin/ $HOME/.config/nvim
-    ln -sf $base_dir/nvim/init.vim $HOME/.config/nvim
+    ln -sf $base_dir/nvim/init.lua $HOME/.config/nvim/init.lua
+    ln -sf $base_dir/nvim/plugins.lua $HOME/.config/nvim/lua/plugins.lua
+    ln -sf $base_dir/nvim/language-servers.lua $HOME/.config/nvim/lua/language-servers.lua
 }
 
 brew_setup() {
@@ -47,7 +54,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep maven awscli jq fontconfig)
+        packages=(git nvim fzf python fd ripgrep maven awscli jq fontconfig dhall-json)
         brew install ${packages[@]}
 
         # Setup fzf
@@ -58,7 +65,7 @@ brew_setup() {
         
         # Setup nvim
         link_nvim
-        vim +'PlugInstall --sync' +qa
+        vim +'PlugInstall --sync' +qa # CHANGE THIS, NO LONGER USING PLUG
     fi
 
     if [[ "$update" = true ]]; then
@@ -67,7 +74,7 @@ brew_setup() {
     fi
 
     ln -sf $base_dir/.hammerspoon $HOME
-    link_nvim
+    nvim_setup
 }
 
 install_fonts() {
@@ -99,21 +106,6 @@ install_fonts() {
     fi
 }
 
-sdk_setup() {
-    if [[ "$full_install" = true ]]; then
-        if ! command -v sdk &> /dev/null; then # This is the proper way but not working, see https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
-            echo "Installing SDKMAN..."
-            curl -s "https://get.sdkman.io" | bash
-        fi
-        sdk install java
-    fi
-
-    if [[ "$update" = true ]]; then
-        sdk selfupdate
-        sdk upgrade
-    fi
-}
-
 omz_setup() {
     if [[ "$full_install" = true ]]; then
         if [ ! -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
@@ -131,6 +123,9 @@ omz_setup() {
         fi
         if [[ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        fi
+        if [[ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-nvm/zsh-nvm.zsh ]]; then
+            git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm
         fi
     fi
     
@@ -152,11 +147,20 @@ haskell_setup() {
         export BOOTSTRAP_HASKELL_INSTALL_HLS=1
         curl https://gitlab.haskell.org/haskell/ghcup-hs/-/raw/master/scripts/bootstrap/bootstrap-haskell?inline=false | sh
     fi
+    if [[ ! -e $HOME/.cabal/bin/dhall-lsp-server ]]; then
+        source $HOME/.ghcup/env
+        cabal install dhall-lsp-server
+    fi
+}
+
+node_setup() {
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    nvm install node
 }
 
 brew_setup
 install_fonts
-sdk_setup
+node_setup
 omz_setup
 p10k_setup
 haskell_setup
