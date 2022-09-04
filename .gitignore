@@ -8,3 +8,5 @@
 
 # VS Code settings file
 .vscode
+
+.luarc.json

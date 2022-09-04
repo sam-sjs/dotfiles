@@ -54,7 +54,7 @@ brew_setup() {
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
-        packages=(git nvim fzf python fd ripgrep maven awscli jq fontconfig dhall-json)
+        packages=(git nvim fzf python fd ripgrep maven awscli jq fontconfig dhall-json lua-language-server)
         brew install ${packages[@]}
 
         # Setup fzf
@@ -158,12 +158,17 @@ node_setup() {
     nvm install node
 }
 
+misc_setup() {
+    npm i -g bash-language-server
+}
+
 brew_setup
 install_fonts
 node_setup
 omz_setup
 p10k_setup
 haskell_setup
+misc_setup
 
 #Symlink configs
 ln -sf $base_dir/.zshrc $HOME
