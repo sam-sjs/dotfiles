@@ -14,6 +14,8 @@ export FZF_ALT_C_COMMAND='fd --type directory . $HOME'
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
+export PATH="$HOME/go/bin:$PATH"
+
 # Stack (Haskell) binaries dir
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
