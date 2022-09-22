@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
   use 'vmchale/dhall-vim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     require('nvim-treesitter.configs').setup{
-      ensure_installed = { 'haskell', 'lua', 'bash', 'go' },
+      ensure_installed = { 'haskell', 'lua', 'bash', 'go', 'cmake' },
       highlight = { enable = true }}
   use {'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end}
   use {'kylechui/nvim-surround', tag = '*', config = function()
