@@ -10,7 +10,7 @@ alias nv='nvim'
 alias nvd='nvim -d'
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "Library/Caches"'
+export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
