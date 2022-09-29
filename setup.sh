@@ -154,8 +154,10 @@ haskell_setup() {
 }
 
 node_setup() {
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    nvm install node
+    if [[ ! $(which node) ]]; then
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+        nvm install node
+    fi
 }
 
 misc_setup() {
@@ -178,3 +180,4 @@ ln -sf $base_dir/.p10k.zsh $HOME
 ln -sf $base_dir/webstorm /usr/local/bin
 ln -sf $base_dir/idea /usr/local/bin
 ln -sf $base_dir/rider /usr/local/bin
+ln -sf $base_dir/.emacs.d $HOME
