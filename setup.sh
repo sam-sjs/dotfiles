@@ -50,7 +50,7 @@ brew_setup() {
         fi
 
         echo "Installing casks..."
-        casks=(kitty hammerspoon)
+        casks=(kitty hammerspoon emacs)
         brew install --cask ${casks[@]}
 
         echo "Installing brew packages..."
