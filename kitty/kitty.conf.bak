@@ -9,7 +9,9 @@ font_feature        Iosevka-Term-Semibold -calt
 font_feature        Iosevka-Term-Heavy -calt
 font_feature        Iosevka-Term-Semibold-Italic -calt
 font_feature        Iosevka-Term-Heavy-Italic -calt
-font_size           15.0
+font_size           12.0
+
+background_opacity 0.5
 
 # Source Code Pro
 #font_family         Source Code Pro Semibold
@@ -50,7 +52,7 @@ map F12 launch --location=hsplit --cwd=current
 map cmd+t new_tab_with_cwd
 
 # Set titlebar colour
-macos_titlebar_color background
+# macos_titlebar_color background
 
 # Hide window title and borders
 # hide_window_decorations yes
@@ -1545,6 +1547,6 @@ enable_audio_bell no
 
 
 # BEGIN_KITTY_THEME
-# One Dark Custom
+# S Sourcerer
 include current-theme.conf
 # END_KITTY_THEME
