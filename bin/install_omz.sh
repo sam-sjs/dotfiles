@@ -19,3 +19,8 @@ fi
 if [[ ! -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
+
+# Link zshrc
+kernel=$(uname -s)
+[[ $kernel == "Linux" ]] && ln -sf $HOME/dotfiles/linux/.zshrc $HOME
+[[ $kernel == "Darwin" ]] && ln -sf $HOME/dotfiles/darwin/.zshrc $HOME

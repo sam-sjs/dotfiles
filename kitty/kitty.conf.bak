@@ -11,8 +11,6 @@ font_feature        Iosevka-Term-Semibold-Italic -calt
 font_feature        Iosevka-Term-Heavy-Italic -calt
 font_size           12.0
 
-background_opacity 0.5
-
 # Source Code Pro
 #font_family         Source Code Pro Semibold
 
@@ -1547,6 +1545,6 @@ enable_audio_bell no
 
 
 # BEGIN_KITTY_THEME
-# S Sourcerer
+# zenburned
 include current-theme.conf
 # END_KITTY_THEME

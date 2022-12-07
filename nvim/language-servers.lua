@@ -51,6 +51,13 @@ require('lspconfig')['gopls'].setup{
 require('lspconfig')['sumneko_lua'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {'vim', 'awesome', 'root', 'client', 'screen'},
+            },
+        },
+    },
 }
 
 require('lspconfig')['bashls'].setup{

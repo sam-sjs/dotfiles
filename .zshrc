@@ -1,17 +1,23 @@
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+setopt autocd extendedglob nomatch
+bindkey -e
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
+alias kt='kitty +kitten themes'
 
 # Go binaries
-path+="$HOME/go/bin:$PATH"
+path+="$HOME/go/bin"
 
 # Stack (Haskell)
 ## Binaries
-path+="$HOME/.local/bin:$PATH"
-path+="$HOME/.cabal/bin:$PATH"
+#path+="$HOME/.ghcup/bin"
+#path+="$HOME/.cabal/bin"
 ## Env
 source ~/.ghcup/env
 
