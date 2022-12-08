@@ -9,6 +9,7 @@ export EDITOR="$VISUAL"
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
+
 alias kt='kitty +kitten themes'
 
 # Go binaries

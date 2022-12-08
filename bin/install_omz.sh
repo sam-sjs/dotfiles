@@ -23,4 +23,4 @@ fi
 # Link zshrc
 kernel=$(uname -s)
 [[ $kernel == "Linux" ]] && ln -sf $HOME/dotfiles/linux/.zshrc $HOME
-[[ $kernel == "Darwin" ]] && ln -sf $HOME/dotfiles/darwin/.zshrc $HOME
+[[ $kernel == "Darwin" ]] && ln -sf $HOME/dotfiles/macos/.zshrc $HOME
