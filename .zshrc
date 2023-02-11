@@ -23,8 +23,12 @@ path+="$HOME/go/bin"
 source ~/.ghcup/env
 
 # OMZ
+## Stop NVM slowing down terminal load time
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting zsh-nvm)
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -34,6 +38,11 @@ source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highli
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
+
+# Decode and pretty print JWTs
+jwt () {
+    cut -d"." -f1,2 <<< $1 | sed 's/\./\n/g' | base64 --decode | jq
+}
 
 # Nix
 if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then

@@ -1,6 +1,16 @@
 #!/bin/bash
 
-install_path=$1
+if [[ "$#" -ne 1 ]]; then
+    echo "Must pass font install path as argument"
+    exit 1
+fi
+
+if ! command -v fc-list &> /dev/null; then
+    echo "Requires 'fontconfig'"
+    exit 1
+fi
+
+install_path=${1%/}
 mkdir -p $install_path
 
 fonts=$(fc-list)
