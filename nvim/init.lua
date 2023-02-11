@@ -20,7 +20,7 @@ opt.timeoutlen = 1000
 
 -- Colourscheme
 opt.termguicolors = true
-cmd [[colorscheme zenburn]]
+cmd [[colorscheme onedark]]
 
 
 -- Mappings

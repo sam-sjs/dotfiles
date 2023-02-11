@@ -21,6 +21,7 @@ return require('packer').startup(function(use)
   use 'junegunn/fzf.vim'
     vim.keymap.set('n', '<Leader><Space>', ':Files<CR>', { silent = true, noremap = true })
     vim.keymap.set('n', '<Leader>a', ':Buffers<CR>', { silent = true, noremap = true })
+    vim.keymap.set('n', '<Leader>g', ':Rg<CR>', { silent = true, noremap = true })
   use 'neovim/nvim-lspconfig'
   use 'vmchale/dhall-vim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

@@ -10,3 +10,6 @@
 .vscode
 
 .luarc.json
+
+# Emacs
+auto-save-list/
