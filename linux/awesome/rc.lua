@@ -269,6 +269,16 @@ local globalkeys = gears.table.join(
     awful.key({ }, "XF86MonBrightnessUp", function ()
         awful.util.spawn("xbacklight -inc 10") end),
 
+    --Volume control
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+        os.execute("amixer set Master 5%+") end),
+
+    awful.key({ }, "XF86AudioLowerVolume", function ()
+        os.execute("amixer set Master 5%-") end),
+
+    awful.key({ }, "XF86AudioMute", function ()
+        os.execute("amixer -q set Master toggle") end),
+
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -313,6 +323,10 @@ local globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+
+    -- Rofi
+    awful.key({"Mod1"}, "space", function () awful.spawn("/usr/bin/rofi -show combi -modes combi -combi-modes \"window,drun\" -window-match-fields class -drun-match-fields name -drun-display-format {name} -sorting-method fzf") end,
+              {description = "run rofi in drun mode", group = "launcher"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
