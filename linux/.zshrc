@@ -1,7 +1,5 @@
 # Aliases
 alias idea='intellij-idea-ultimate-edition'
-# OMZ Theme
-ZSH_THEME="lukerandall"
 
 # Source core .zshrc file
 source $HOME/dotfiles/.zshrc 

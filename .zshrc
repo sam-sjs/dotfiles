@@ -12,6 +12,9 @@ alias nvd='nvim -d'
 
 alias kt='kitty +kitten themes'
 
+# OMZ Theme
+ZSH_THEME="lukerandall"
+
 # Go binaries
 path+="$HOME/go/bin"
 
@@ -33,13 +36,16 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Stop highlighting from slowing down large pastes
+export ZSH_HIGHLIGHT_MAXLENGTH=60
+
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
 
-# Decode and pretty print JWTs
+# Decode and pretty print JWTs - not working
 jwt () {
     cut -d"." -f1,2 <<< $1 | sed 's/\./\n/g' | base64 --decode | jq
 }
@@ -48,3 +54,7 @@ jwt () {
 if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

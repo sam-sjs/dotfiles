@@ -24,7 +24,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, bufopts)
+-- Causing issues on load
+--  vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
 local lsp_flags = {
@@ -76,6 +77,11 @@ require('lspconfig')['clangd'].setup{
 }
 
 require('lspconfig')['rnix'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+
+require('lspconfig')['rust_analyzer'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
