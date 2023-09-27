@@ -13,7 +13,7 @@ alias nvd='nvim -d'
 alias kt='kitty +kitten themes'
 
 # OMZ Theme
-ZSH_THEME="lukerandall"
+ZSH_THEME="lukerandall-custom"
 
 # Go binaries
 path+="$HOME/go/bin"
