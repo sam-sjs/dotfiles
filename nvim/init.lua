@@ -4,6 +4,7 @@ local cmd = vim.cmd
 g.mapleader = ' '
 
 require('plugins')
+require('completion')
 require('language-servers')
 
 -- Settings
