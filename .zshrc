@@ -11,6 +11,7 @@ alias nv='nvim'
 alias nvd='nvim -d'
 
 alias kt='kitty +kitten themes'
+alias ssh='kitten ssh'
 
 # OMZ Theme
 ZSH_THEME="lukerandall-custom"
