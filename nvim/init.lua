@@ -21,7 +21,7 @@ opt.timeoutlen = 1000
 
 -- Colourscheme
 opt.termguicolors = true
-cmd [[colorscheme onedark]]
+cmd [[colorscheme jellybeans]]
 
 
 -- Mappings
