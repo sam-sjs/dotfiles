@@ -38,7 +38,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Stop highlighting from slowing down large pastes
-export ZSH_HIGHLIGHT_MAXLENGTH=60
+export ZSH_HIGHLIGHT_MAXLENGTH=150
 
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
