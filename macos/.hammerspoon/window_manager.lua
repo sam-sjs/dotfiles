@@ -1,10 +1,13 @@
-local WindowManager = {}
+local window_manager = {}
+local grid = require('grid')
 local hyperKey = {"cmd", "alt", "ctrl"}
-local gridwidth = 24
-local gridheight = 12
 
-hs.grid.setGrid(gridwidth..'x'..gridheight)
+hs.grid.setGrid(grid.WIDTH..'x'..grid.HEIGHT)
 hs.grid.setMargins('0, 0')
+
+-- TODO: remove after testing
+local gridwidth = grid.WIDTH
+local gridheight = grid.HEIGHT
 
 local gridPosition = {
     leftHalf = { x = 0, y = 0, w = gridwidth / 2, h = gridheight },
@@ -41,26 +44,26 @@ local gridPosition = {
     innerFull = { x = 0, y = 0, w = gridwidth, h = gridheight }
 }
 
-function WindowManager.moveFocusedWindow(cellDimensions)
+function window_manager.moveFocusedWindow(cellDimensions)
     local window = hs.window.focusedWindow()
-    local newposition = WindowManager.getNewPosition(window, cellDimensions)
+    local newposition = window_manager.getNewPosition(window, cellDimensions)
     hs.grid.set(window, newposition)
 end
 
-function WindowManager.expandWindow(direction)
+function window_manager.expandWindow(direction)
     local fwin = hs.window.focusedWindow()
     local cell = hs.grid.get(fwin)
     local grow_directions = {
-        west = WindowManager.generateCellWithinScreen(cell.x - 1, cell.y, cell.w + 1, cell.h),
-        north = WindowManager.generateCellWithinScreen(cell.x, cell.y - 1, cell.w, cell.h + 1),
-        east = WindowManager.generateCellWithinScreen(cell.x, cell.y, cell.w + 1, cell.h),
-        south = WindowManager.generateCellWithinScreen(cell.x, cell.y, cell.w, cell.h + 1)
+        west = window_manager.generateCellWithinScreen(cell.x - 1, cell.y, cell.w + 1, cell.h),
+        north = window_manager.generateCellWithinScreen(cell.x, cell.y - 1, cell.w, cell.h + 1),
+        east = window_manager.generateCellWithinScreen(cell.x, cell.y, cell.w + 1, cell.h),
+        south = window_manager.generateCellWithinScreen(cell.x, cell.y, cell.w, cell.h + 1)
     }
-    WindowManager.clearAdjacentWindows(direction)
+    window_manager.clearAdjacentWindows(direction)
     hs.grid.set(fwin, grow_directions[direction])
 end
 
-function WindowManager.generateCellWithinScreen(x, y, w, h)
+function window_manager.generateCellWithinScreen(x, y, w, h)
     local screen = hs.window.focusedWindow():screen()
     local screen_grid = hs.grid.getGridFrame(screen)
     if x < 0 then x = 0 end
@@ -71,28 +74,28 @@ function WindowManager.generateCellWithinScreen(x, y, w, h)
     return hs.geometry.rect(x, y, w, h)
 end
 
-function WindowManager.clearAdjacentWindows(direction)
+function window_manager.clearAdjacentWindows(direction)
     local fwin = hs.window.focusedWindow()
     local cell = hs.grid.get(fwin)
-    local windata = WindowManager.getWindowData(direction)
+    local windata = window_manager.getWindowData(direction)
     for _, win in pairs(windata.windows) do
         windata.shrink(cell, win)
     end
 end
 
-function WindowManager.getWindowData(direction)
+function window_manager.getWindowData(direction)
     local fwin = hs.window.focusedWindow()
     local window_data = {
-        west = { windows = fwin:windowsToWest(), shrink = WindowManager.createSpaceWest },
-        north = { windows = fwin:windowsToNorth(), shrink = WindowManager.createSpaceNorth },
-        east = { windows = fwin:windowsToEast(), shrink = WindowManager.createSpaceEast },
-        south = { windows = fwin:windowsToSouth(), shrink = WindowManager.createSpaceSouth }
+        west = { windows = fwin:windowsToWest(), shrink = window_manager.createSpaceWest },
+        north = { windows = fwin:windowsToNorth(), shrink = window_manager.createSpaceNorth },
+        east = { windows = fwin:windowsToEast(), shrink = window_manager.createSpaceEast },
+        south = { windows = fwin:windowsToSouth(), shrink = window_manager.createSpaceSouth }
     }
 
     return window_data[direction]
 end
 
-function WindowManager.createSpaceWest(focus_cell, adjacent_win)
+function window_manager.createSpaceWest(focus_cell, adjacent_win)
     local adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.x + adjacent_cell.w >= focus_cell.x then
         hs.grid.adjustWindow(function(newcell)
@@ -101,7 +104,7 @@ function WindowManager.createSpaceWest(focus_cell, adjacent_win)
     end
 end
 
-function WindowManager.createSpaceNorth(focus_cell, adjacent_win)
+function window_manager.createSpaceNorth(focus_cell, adjacent_win)
     local adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.y + adjacent_cell.h >= focus_cell.y then
         hs.grid.adjustWindow(function(newcell)
@@ -110,7 +113,7 @@ function WindowManager.createSpaceNorth(focus_cell, adjacent_win)
     end
 end
 
-function WindowManager.createSpaceEast(focus_cell, adjacent_win)
+function window_manager.createSpaceEast(focus_cell, adjacent_win)
     local adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.x <= focus_cell.x + focus_cell.w then
         hs.grid.adjustWindow(function(newcell)
@@ -120,7 +123,7 @@ function WindowManager.createSpaceEast(focus_cell, adjacent_win)
     end
 end
 
-function WindowManager.createSpaceSouth(focus_cell, adjacent_win)
+function window_manager.createSpaceSouth(focus_cell, adjacent_win)
     local adjacent_cell = hs.grid.get(adjacent_win)
     if adjacent_cell.y <= focus_cell.y + focus_cell.h then
         hs.grid.adjustWindow(function(newcell)
@@ -130,11 +133,11 @@ function WindowManager.createSpaceSouth(focus_cell, adjacent_win)
     end
 end
 
-function WindowManager.getNewPosition(window, cellDimensions)
+function window_manager.getNewPosition(window, cellDimensions)
     local currentCell = hs.grid.get(window)
     local nextCell
     for i, cell in ipairs(cellDimensions) do
-        if WindowManager.areCellsEqual(currentCell, cellDimensions[i]) then
+        if window_manager.areCellsEqual(currentCell, cellDimensions[i]) then
             nextCell = cellDimensions[i + 1]
         end
     end
@@ -142,88 +145,91 @@ function WindowManager.getNewPosition(window, cellDimensions)
     return nextCell or cellDimensions[1]
 end
 
-function WindowManager.areCellsEqual(cell1, cell2)
+function window_manager.areCellsEqual(cell1, cell2)
     return cell1.x == cell2.x and cell1.y == cell2.y and
            cell1.w == cell2.w and cell1.h == cell2.h
 end
 
 
 hs.hotkey.bind(hyperKey, "J", function()
-    WindowManager.moveFocusedWindow({gridPosition.leftThird, gridPosition.leftTwoThirds})
+    window_manager.moveFocusedWindow({
+        grid.get_position(grid.NA, grid.FULL, grid.LEFT, grid.THIRD),
+        grid.get_position(grid.NA, grid.FULL, grid.LEFT, grid.TWO_THIRDS)
+    })
 end)
 
 hs.hotkey.bind(hyperKey, "K", function()
-    WindowManager.moveFocusedWindow({gridPosition.midThird, gridPosition.midTwoThirds, gridPosition.midHalf})
+    window_manager.moveFocusedWindow({grid.get_position(grid.NA, grid.FULL, grid.CENTER, grid.THIRD), grid.get_position(grid.NA, grid.FULL, grid.CENTER, grid.TWO_THIRDS), gridPosition.midHalf})
 end)
 
 hs.hotkey.bind(hyperKey, "L", function()
-    WindowManager.moveFocusedWindow({gridPosition.rightThird, gridPosition.rightTwoThirds})
+    window_manager.moveFocusedWindow({gridPosition.rightThird, gridPosition.rightTwoThirds})
 end)
 
 hs.hotkey.bind(hyperKey, "U", function()
-    WindowManager.moveFocusedWindow({gridPosition.topLeftSixth, gridPosition.topLeftTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.topLeftSixth, gridPosition.topLeftTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, "I", function()
-    WindowManager.moveFocusedWindow({gridPosition.topMidSixth, gridPosition.topMidTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.topMidSixth, gridPosition.topMidTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, "O", function()
-    WindowManager.moveFocusedWindow({gridPosition.topRightSixth, gridPosition.topRightTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.topRightSixth, gridPosition.topRightTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, "M", function()
-    WindowManager.moveFocusedWindow({gridPosition.botLeftSixth, gridPosition.botLeftTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.botLeftSixth, gridPosition.botLeftTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, ",", function()
-    WindowManager.moveFocusedWindow({gridPosition.botMidSixth, gridPosition.botMidTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.botMidSixth, gridPosition.botMidTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, ".", function()
-    WindowManager.moveFocusedWindow({gridPosition.botRightSixth, gridPosition.botRightTwoSixths})
+    window_manager.moveFocusedWindow({gridPosition.botRightSixth, gridPosition.botRightTwoSixths})
 end)
 
 hs.hotkey.bind(hyperKey, "Y", function()
-    WindowManager.moveFocusedWindow({gridPosition.topLeftQuarter, gridPosition.topLeftEighth})
+    window_manager.moveFocusedWindow({gridPosition.topLeftQuarter, gridPosition.topLeftEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "P", function()
-    WindowManager.moveFocusedWindow({gridPosition.topRightQuarter, gridPosition.topRightEighth})
+    window_manager.moveFocusedWindow({gridPosition.topRightQuarter, gridPosition.topRightEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "N", function()
-    WindowManager.moveFocusedWindow({gridPosition.botLeftQuarter, gridPosition.botLeftEighth})
+    window_manager.moveFocusedWindow({gridPosition.botLeftQuarter, gridPosition.botLeftEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "/", function()
-    WindowManager.moveFocusedWindow({gridPosition.botRightQuarter, gridPosition.botRightEighth})
+    window_manager.moveFocusedWindow({gridPosition.botRightQuarter, gridPosition.botRightEighth})
 end)
 
 hs.hotkey.bind(hyperKey, "H", function()
-    WindowManager.moveFocusedWindow({gridPosition.leftHalf, gridPosition.leftQuarter})
+    window_manager.moveFocusedWindow({gridPosition.leftHalf, gridPosition.leftQuarter})
 end)
 
 hs.hotkey.bind(hyperKey, ";", function()
-    WindowManager.moveFocusedWindow({gridPosition.rightHalf, gridPosition.rightQuarter})
+    window_manager.moveFocusedWindow({gridPosition.rightHalf, gridPosition.rightQuarter})
 end)
 
 hs.hotkey.bind(hyperKey, "left", function()
-    WindowManager.expandWindow("west")
+    window_manager.expandWindow("west")
 end)
 
 hs.hotkey.bind(hyperKey, "right", function()
-    WindowManager.expandWindow("east")
+    window_manager.expandWindow("east")
 end)
 
 hs.hotkey.bind(hyperKey, "up", function()
-    WindowManager.expandWindow("north")
+    window_manager.expandWindow("north")
 end)
 
 hs.hotkey.bind(hyperKey, "down", function()
-    WindowManager.expandWindow("south")
+    window_manager.expandWindow("south")
 end)
 
 hs.hotkey.bind(hyperKey, "return", function()
-    WindowManager.moveFocusedWindow({ gridPosition.innerFull })
+    window_manager.moveFocusedWindow({ gridPosition.innerFull })
 end)
