@@ -10,9 +10,6 @@ export EDITOR="$VISUAL"
 alias nv='nvim'
 alias nvd='nvim -d'
 
-alias kt='kitty +kitten themes'
-alias ssh='kitten ssh'
-
 # OMZ Theme
 ZSH_THEME="lukerandall-custom"
 
@@ -45,11 +42,6 @@ export ZSH_HIGHLIGHT_MAXLENGTH=150
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
-
-# Decode and pretty print JWTs - not working
-jwt () {
-    cut -d"." -f1,2 <<< $1 | sed 's/\./\n/g' | base64 --decode | jq
-}
 
 # Nix
 if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
