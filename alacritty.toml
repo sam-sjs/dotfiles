@@ -1,0 +1,59 @@
+[shell]
+program = "/bin/zsh"
+args = ["-l", "-c", "tmux new-session -A -D -s main"]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+decorations = "Buttonless"
+padding = { x = 4, y = 5}
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "Iosevka Term"
+style = "Semibold"
+
+[font.bold]
+family = "Iosevka Term"
+style = "Heavy"
+
+[font.italic]
+family = "Iosevka Term"
+style = "Semibold Italic"
+
+[font.bold_italic]
+family = "Iosevka Term"
+style = "Heavy Italic"
+
+[colors.primary]
+foreground = "#C2C2B0"
+background = "#222222"
+
+[colors.normal]
+black = "#111111"
+red = "#AA4450"
+green = "#719611"
+yellow = "#FF9800"
+blue = "#6688AA"
+magenta = "#8F6F8F"
+cyan = "#528B8B"
+white = "#D3D3D3"
+
+[colors.bright]
+black = "#515D51"
+red = "#FF6A6A"
+green = "#B1D631"
+yellow = "#87875F"
+blue = "#90B0DF"
+magenta = "#8181A6"
+cyan = "#87CEEB"
+white = "#C1CDC1"
+
+
+# font_feature        Iosevka-Term-Semibold -calt
+# font_feature        Iosevka-Term-Heavy -calt
+# font_feature        Iosevka-Term-Semibold-Italic -calt
+# font_feature        Iosevka-Term-Heavy-Italic -calt
