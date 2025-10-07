@@ -1,4 +1,4 @@
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 args = ["-l", "-c", "tmux new-session -A -D -s main"]
 
@@ -8,25 +8,33 @@ TERM = "xterm-256color"
 [window]
 decorations = "Buttonless"
 padding = { x = 4, y = 5}
+opacity = 0.7
+blur = true
+resize_increments = true
+option_as_alt = "Both"
+
+[scrolling]
+history = 50000
 
 [font]
-size = 14.0
+size = 13.5
+offset = { x = 1, y = 0 }
 
 [font.normal]
 family = "Iosevka Term"
-style = "Semibold"
+style = "Regular"
 
 [font.bold]
 family = "Iosevka Term"
-style = "Heavy"
+style = "Semibold"
 
 [font.italic]
 family = "Iosevka Term"
-style = "Semibold Italic"
+style = "Regular Italic"
 
 [font.bold_italic]
 family = "Iosevka Term"
-style = "Heavy Italic"
+style = "Semibold Italic"
 
 [colors.primary]
 foreground = "#C2C2B0"
