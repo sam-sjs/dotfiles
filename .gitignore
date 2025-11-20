@@ -13,3 +13,6 @@
 
 # Emacs
 auto-save-list/
+
+# Jetbrains
+.idea/
