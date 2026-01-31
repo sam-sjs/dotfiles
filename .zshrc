@@ -5,6 +5,7 @@ setopt autocd extendedglob nomatch
 bindkey -e
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+path+="$HOME/.local/bin"
 
 # Neovim
 alias nv='nvim'
@@ -14,7 +15,8 @@ alias nvd='nvim -d'
 ZSH_THEME="lukerandall-custom"
 
 # Go binaries
-path+="$HOME/go/bin"
+# Brew OpenSSH - Built in SecurityKeyProvider
+path=(/usr/local/opt/openssh/bin $HOME/go/bin $path)
 
 # Stack (Haskell)
 ## Binaries
@@ -22,6 +24,9 @@ path+="$HOME/go/bin"
 #path+="$HOME/.cabal/bin"
 ## Env
 source ~/.ghcup/env
+
+# Bitwarden SSH Agent
+export SSH_AUTH_SOCK=/Users/sam/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 
 # OMZ
 ## Stop NVM slowing down terminal load time
