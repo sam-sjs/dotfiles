@@ -23,10 +23,10 @@ Visual.style('cursor', 'background-color: #81A2BE;');
 -- DELETE LINE TO ENABLE THEME */
 
 // Nord
-Hints.style('border: solid 2px #4C566A; color:#A3BE8C; background: initial; background-color: #3B4252;');
-Hints.style("border: solid 2px #4C566A !important; padding: 1px !important; color: #E5E9F0 !important; background: #3B4252 !important;", "text");
-Visual.style('marks', 'background-color: #A3BE8C99;');
-Visual.style('cursor', 'background-color: #88C0D0;');
+api.Hints.style('border: solid 2px #4C566A; color:#A3BE8C; background: initial; background-color: #3B4252;');
+api.Hints.style("border: solid 2px #4C566A !important; padding: 1px !important; color: #E5E9F0 !important; background: #3B4252 !important;", "text");
+api.Visual.style('marks', 'background-color: #A3BE8C99;');
+api.Visual.style('cursor', 'background-color: #88C0D0;');
 
 // Doom One
 /* -- DELETE LINE TO ENABLE THEME
