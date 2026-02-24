@@ -3,7 +3,7 @@ settings.hintAlign = "left";
 
 // keybinds
  mapkey("R", "#4Force Reload the page", function () {
-+  RUNTIME.repeats = 1;
+   RUNTIME.repeats = 1;
    RUNTIME("reloadTab", { nocache: true });
  });
 
