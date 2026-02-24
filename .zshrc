@@ -7,6 +7,11 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 path+="$HOME/.local/bin"
 
+# Get Vault admin cert
+export VAULT_ADDR=https://vault.samiam.dev:8200
+alias vl='vault login -method=userpass username=admin'
+alias get-cert='vault write -field=signed_key ssh-client-signer/sign/user-role public_key=@$HOME/.ssh/id_ed25519_bw.pub valid_principals="admin" > ~/.ssh/id_ed25519_bw-cert.pub && echo "Certificate refreshed! Valid for 3h."'
+
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
