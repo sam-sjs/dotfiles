@@ -2,8 +2,14 @@
 settings.hintAlign = "left";
 
 // keybinds
-api.mapkey('<Ctrl-Tab>', 'Choose a tab with omnibar', function() {
-    api.Front.openOmnibar({type: "Tabs"});
+ mapkey("R", "#4Force Reload the page", function () {
++  RUNTIME.repeats = 1;
+   RUNTIME("reloadTab", { nocache: true });
+ });
+
+mapkey("x", "#3Close current tab", () => {
+  RUNTIME.repeats = 1;
+  RUNTIME("closeTab");
 });
 
 api.map('H', 'S');
