@@ -3,6 +3,8 @@ const { mapkey, RUNTIME } = api;
 
 // general settings
 settings.hintAlign = "left";
+settings.scrollStepSize = 100;
+settings.focusAfterClosed = "last";
 
 // keybinds
  mapkey("R", "#4Force Reload the page", function () {
@@ -58,7 +60,7 @@ settings.theme = `
 :root {
   /* Font */
   --font: 'Source Code Pro', Ubuntu, sans;
-  --font-size: 12;
+  --font-size: 24;
   --font-weight: bold;
 
   /* -------------- */
