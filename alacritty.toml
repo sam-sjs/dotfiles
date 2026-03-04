@@ -59,6 +59,12 @@ magenta = "#8181A6"
 cyan = "#87CEEB"
 white = "#C1CDC1"
 
+[keyboard]
+bindings = [
+  { key = "Left", mods = "Alt", chars = "\u001Bb" },
+  { key = "Right" , mods = "Alt", chars = "\u001Bf" },
+]
+
 
 # font_feature        Iosevka-Term-Semibold -calt
 # font_feature        Iosevka-Term-Heavy -calt
