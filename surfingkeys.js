@@ -5,6 +5,7 @@ const { mapkey, RUNTIME } = api;
 settings.hintAlign = "left";
 settings.scrollStepSize = 100;
 settings.focusAfterClosed = "last";
+settings.tabsThreshold = 10;
 
 // keybinds
  mapkey("R", "#4Force Reload the page", function () {
