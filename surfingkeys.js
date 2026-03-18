@@ -18,9 +18,17 @@ mapkey("x", "#3Close current tab", () => {
   RUNTIME("closeTab");
 });
 
-api.map('H', 'S');
-api.map('L', 'D');
-api.map('F', 'C');
+mapkey("H", "Go on tab left", function () {
+  RUNTIME('previousTab');
+});
+
+mapkey("L", "Go on tab right", function () {
+  RUNTIME('nextTab');
+});
+
+map('H', 'S');
+map('L', 'D');
+map('F', 'C');
 
 // ---- Hints ----
 // Hints have to be defined separately
