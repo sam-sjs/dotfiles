@@ -1,5 +1,5 @@
 // import api
-const { mapkey, RUNTIME } = api;
+const { map, mapkey, RUNTIME } = api;
 
 // general settings
 settings.hintAlign = "left";
