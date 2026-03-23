@@ -31,10 +31,16 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'vmchale/dhall-vim'
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    require('nvim-treesitter.configs').setup{
-      ensure_installed = { 'haskell', 'lua', 'bash', 'go', 'cmake', 'cpp', 'nix', 'yaml', 'dockerfile', 'rust'},
-      highlight = { enable = true }}
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {'lua', 'bash', 'go', 'cpp', 'nix', 'yaml', 'dockerfile', 'rust'},
+        highlight = { enable = true }
+      }
+    end
+  }
   use {'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end}
   use {'kylechui/nvim-surround', tag = '*', config = function()
     require('nvim-surround').setup({}) end}
