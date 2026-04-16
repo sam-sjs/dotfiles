@@ -32,7 +32,7 @@ export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting zsh-nvm)
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -50,6 +50,9 @@ export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exc
 jwt () {
     cut -d"." -f1,2 <<< $1 | sed 's/\./\n/g' | base64 --decode | jq
 }
+
+# Added by Antigravity
+export PATH="/Users/sam/.antigravity/antigravity/bin:$PATH"
 
 # Load Nix environment
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
