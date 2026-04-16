@@ -1,5 +1,11 @@
 # Theme
-theme = Catppuccin Frappe
+theme = Catppuccin Mocha
+
+# Font
+font-family = "Iosevka Term"
+font-size = 13.5
+font-thicken = true
+font-thicken-strength = 192
 
 # Keybinds
 keybind = global:ctrl+grave_accent=toggle_quick_terminal

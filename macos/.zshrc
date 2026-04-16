@@ -1,6 +1,9 @@
 # Source core .zshrc file
 source ~/dotfiles/.zshrc 
 
+# Add macos specific to path
+path+="/Applications/Ghostty.app/Contents/MacOS"
+
 # Something to do with kubectl, I forgot
 ZSH_DISABLE_COMPFIX=true
 
