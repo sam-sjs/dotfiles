@@ -1,0 +1,11 @@
+# Theme
+theme = Catppuccin Frappe
+
+# Keybinds
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# Settings
+cursor-style = block
+cursor-style-blink = false
+macos-option-as-alt = true
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
