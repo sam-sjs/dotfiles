@@ -15,6 +15,8 @@ alias get-cert='vault write -field=signed_key ssh-client-signer/sign/user-role p
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
+alias nf='nvim $(fzf)'
+alias vf='nvim $(fzf)'
 
 # OMZ Theme
 ZSH_THEME="lukerandall-custom"
@@ -41,7 +43,7 @@ source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highli
 export ZSH_HIGHLIGHT_MAXLENGTH=150
 
 # Fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
