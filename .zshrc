@@ -69,6 +69,7 @@ jwt () {
 export PATH="/Users/sam/.antigravity/antigravity/bin:$PATH"
 
 # Load Nix environment
+alias ns='nix-shell --command "exec zsh"'
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
