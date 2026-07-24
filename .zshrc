@@ -18,6 +18,9 @@ else
     compinit -C
 fi
 
+# Source MYOB specific settings
+[[ -f "$HOME/.myob_zshrc" ]] && source "$HOME/.myob_zshrc"
+
 # Get Vault admin cert
 export VAULT_ADDR=https://vault.samiam.dev:8200
 alias vl='vault login -method=userpass username=admin'
