@@ -1,56 +1,74 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
-end
+return {
+    -- Colorscheme
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                flavour = "macchiato",
+            })
+            vim.cmd.colorscheme("catppuccin")
+        end
+    },
 
-local packer_bootstrap = ensure_packer()
+    -- Fuzzy Finder
+    {
+        "junegunn/fzf.vim",
+        dependencies = { "junegunn/fzf" },
+        keys = {
+            { "<Leader><Space>", ":Files<CR>", silent = true },
+            { "<Leader>a", ":Buffers<CR>", silent = true },
+            { "<Leader>r", ":Rg<CR>", silent = true },
+        }
+    },
 
+    -- LSP & Autocompletion Dependencies
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    "vmchale/dhall-vim",
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'joshdick/onedark.vim'
-  use 'nanotech/jellybeans.vim'
-  use 'jnurmine/Zenburn'
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
-    vim.keymap.set('n', '<Leader><Space>', ':Files<CR>', { silent = true, noremap = true })
-    vim.keymap.set('n', '<Leader>a', ':Buffers<CR>', { silent = true, noremap = true })
-    vim.keymap.set('n', '<Leader>g', ':Rg<CR>', { silent = true, noremap = true })
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'vmchale/dhall-vim'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = {'lua', 'bash', 'go', 'cpp', 'nix', 'yaml', 'dockerfile', 'rust'},
-        highlight = { enable = true }
-      }
-    end
-  }
-  use {'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end}
-  use {'kylechui/nvim-surround', tag = '*', config = function()
-    require('nvim-surround').setup({}) end}
-  use 'tpope/vim-fugitive'
-    vim.keymap.set('n', '<Leader>g', '<Space>g', { silent = true, noremap = false })
-    vim.keymap.set('n', '<Space>gd', ':Gdiff<CR>', { silent = true, noremap = true })
-    vim.keymap.set('n', '<Space>gst', ':Git<CR>', { silent = true, noremap = true })
-    vim.keymap.set('n', '<Space>gb', ':Git blame<CR>', { silent = true, noremap = true })
+    -- Tree-sitter Manager
+    {
+        "romus204/tree-sitter-manager.nvim",
+        config = function()
+            require("tree-sitter-manager").setup({
+                ensure_installed = { 'lua', 'bash', 'go', 'cpp', 'nix', 'yaml', 'dockerfile', 'rust' },
+            })
+        end
+    },
 
-    if packer_bootstrap then
-      require('packer').sync()
-    end
-end)
+    -- Autopairs
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup({})
+        end
+    },
+
+    -- Surround
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    },
+
+    -- Git Fugitive
+    {
+        "tpope/vim-fugitive",
+        keys = {
+            { "<Leader>g", ":Git ", remap = true },
+            { "<Leader>gd", ":Gdiff<CR>", silent = true },
+            { "<Leader>gst", ":Git<CR>", silent = true },
+            { "<Leader>gb", ":Git blame<CR>", silent = true },
+        }
+    }
+}

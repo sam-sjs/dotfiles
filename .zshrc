@@ -1,11 +1,25 @@
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
+DISABLE_MAGIC_FUNCTIONS="true"
+ZSH_DISABLE_COMPFIX="true"
+
 setopt autocd extendedglob nomatch
 bindkey -e
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 path+="$HOME/.local/bin"
+
+# Smarter completion initialization
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
+# Source MYOB specific settings
+[[ -f "$HOME/.myob_zshrc" ]] && source "$HOME/.myob_zshrc"
 
 # Get Vault admin cert
 export VAULT_ADDR=https://vault.samiam.dev:8200
@@ -15,6 +29,8 @@ alias get-cert='vault write -field=signed_key ssh-client-signer/sign/user-role p
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
+alias nf='nvim $(fzf)'
+alias vf='nvim $(fzf)'
 
 # OMZ Theme
 ZSH_THEME="lukerandall-custom"
@@ -32,16 +48,14 @@ export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting zsh-nvm)
+plugins=(git kubectl zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Stop highlighting from slowing down large pastes
-export ZSH_HIGHLIGHT_MAXLENGTH=150
-
 # Fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
@@ -55,6 +69,7 @@ jwt () {
 export PATH="/Users/sam/.antigravity/antigravity/bin:$PATH"
 
 # Load Nix environment
+alias ns='nix-shell --command "exec zsh"'
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
