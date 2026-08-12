@@ -236,6 +236,169 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "ELECOM DEFT Pro TrackBall: Fn2 layer",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "description": "Fn2 (hold) activates trackball layer",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button7"
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": 0,
+                                            "name": "trackball_layer",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + right click -> copy",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button2"
+                                },
+                                "to": [{ "key_code": "c", "modifiers": ["left_command"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + left click -> paste",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [{ "key_code": "v", "modifiers": ["left_command"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + back -> move one Space right",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button4"
+                                },
+                                "to": [{ "key_code": "right_arrow", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + forward -> move one Space left",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button5"
+                                },
+                                "to": [{ "key_code": "left_arrow", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + Fn1 -> Mission Control",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button6"
+                                },
+                                "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "description": "Fn3 -> cut",
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "pointing_button": "button8"
+                                },
+                                "to": [{ "key_code": "x", "modifiers": ["left_command"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "product_id": 307, "vendor_id": 1390 }],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "name": "trackball_layer",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Fn2 + ball motion -> scroll",
+                                "from": { "modifiers": { "optional": ["any"] } },
+                                "options": {
+                                    "momentum_scroll_enabled": true,
+                                    "speed_multiplier": 1.0
+                                },
+                                "type": "mouse_motion_to_scroll"
+                            }
+                        ]
                     }
                 ]
             },
@@ -247,6 +410,15 @@
                         "vendor_id": 7504
                     },
                     "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 307,
+                        "vendor_id": 1390
+                    },
+                    "ignore": false,
+                    "ignore_vendor_events": true
                 }
             ],
             "name": "Default profile",
