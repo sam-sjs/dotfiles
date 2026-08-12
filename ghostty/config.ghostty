@@ -7,9 +7,6 @@ font-size = 13.5
 font-thicken = true
 font-thicken-strength = 192
 
-# Keybinds
-keybind = global:ctrl+grave_accent=toggle_quick_terminal
-
 # Settings
 cursor-style = block
 cursor-style-blink = false
