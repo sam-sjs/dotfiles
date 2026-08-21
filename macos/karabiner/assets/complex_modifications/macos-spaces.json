@@ -66,10 +66,7 @@
           },
           "to": [
             {
-              "key_code": "1",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f13"
             }
           ]
         },
@@ -89,10 +86,7 @@
           },
           "to": [
             {
-              "key_code": "2",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f16"
             }
           ]
         },
@@ -112,10 +106,7 @@
           },
           "to": [
             {
-              "key_code": "3",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f17"
             }
           ]
         },
@@ -135,10 +126,7 @@
           },
           "to": [
             {
-              "key_code": "4",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f18"
             }
           ]
         },
@@ -158,10 +146,7 @@
           },
           "to": [
             {
-              "key_code": "5",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f19"
             }
           ]
         },
@@ -181,10 +166,8 @@
           },
           "to": [
             {
-              "key_code": "6",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f13",
+              "modifiers": ["shift"]
             }
           ]
         },
@@ -204,10 +187,8 @@
           },
           "to": [
             {
-              "key_code": "7",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f16",
+              "modifiers": ["shift"]
             }
           ]
         },
@@ -227,10 +208,8 @@
           },
           "to": [
             {
-              "key_code": "8",
-              "modifiers": [
-                "control"
-              ]
+              "key_code": "f17",
+              "modifiers": ["shift"]
             }
           ]
         },
@@ -250,10 +229,29 @@
           },
           "to": [
             {
-              "key_code": "9",
-              "modifiers": [
-                "control"
+              "key_code": "f18",
+              "modifiers": ["shift"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "0",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
               ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f19",
+              "modifiers": ["shift"]
             }
           ]
         }
