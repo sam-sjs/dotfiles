@@ -10,6 +10,10 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 path+="$HOME/.local/bin"
 
+# Handle navigate by word at shell level
+bindkey $'\e[1;3D' backward-word
+bindkey $'\e[1;3C' forward-word
+
 # Smarter completion initialization
 autoload -Uz compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then

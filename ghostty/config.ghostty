@@ -12,20 +12,3 @@ cursor-style = block
 cursor-style-blink = false
 macos-option-as-alt = true
 shell-integration-features = no-cursor,ssh-env,ssh-terminfo
-
-# Work around Ghostty Ctrl+Alt+digit modifyOtherKeys encoding.
-# Ctrl+Alt = modifier 7; final number is the ASCII codepoint.
-keybind = ctrl+alt+0=csi:27;7;48~
-keybind = ctrl+alt+1=csi:27;7;49~
-keybind = ctrl+alt+2=csi:27;7;50~
-keybind = ctrl+alt+3=csi:27;7;51~
-keybind = ctrl+alt+4=csi:27;7;52~
-keybind = ctrl+alt+5=csi:27;7;53~
-keybind = ctrl+alt+6=csi:27;7;54~
-keybind = ctrl+alt+7=csi:27;7;55~
-keybind = ctrl+alt+8=csi:27;7;56~
-keybind = ctrl+alt+9=csi:27;7;57~
-
-# Disable Ghostty intercepting alt+left/right
-keybind = alt+arrow_left=unbind
-keybind = alt+arrow_right=unbind
