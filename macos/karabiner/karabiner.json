@@ -5,178 +5,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Cmd+Opt+Left/Right moves Spaces; Cmd+Opt+1..9 selects Desktop 1..9",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_arrow",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow",
-                                        "modifiers": ["control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "right_arrow",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow",
-                                        "modifiers": ["control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "1",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f13" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "2",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f16" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "3",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f17" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "4",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f18" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "5",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f19" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "6",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f13",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "7",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f16",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "8",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f17",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "9",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f18",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "0",
-                                    "modifiers": {
-                                        "mandatory": ["command", "option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f19",
-                                        "modifiers": ["shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Caps Lock to Control (hold) / Escape (press)",
                         "manipulators": [
                             {
@@ -882,7 +710,6 @@
                         "product_id": 306,
                         "vendor_id": 1390
                     },
-                    "ignore": false,
                     "ignore_vendor_events": true
                 },
                 {
@@ -891,7 +718,8 @@
                         "product_id": 306,
                         "vendor_id": 1390
                     },
-                    "ignore": true
+                    "ignore": true,
+                    "ignore_vendor_events": true
                 },
                 {
                     "identifiers": {
