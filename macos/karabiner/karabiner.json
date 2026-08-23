@@ -710,6 +710,7 @@
                         "product_id": 306,
                         "vendor_id": 1390
                     },
+                    "ignore": false,
                     "ignore_vendor_events": true
                 },
                 {

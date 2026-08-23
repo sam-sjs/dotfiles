@@ -1,13 +1,16 @@
 onboarding = false
 
 [keys]
-prefix = "ctrl+a"
+prefix    = "ctrl+a"
 copy_mode = "prefix+c"
 
 # ---------------------------------------------------------------------------
 # Workspaces
 # ---------------------------------------------------------------------------
-new_workspace = "prefix+n"
+new_workspace      = "prefix+w"
+previous_workspace = "ctrl+alt+up"
+next_workspace     = "ctrl+alt+down"
+workspace_picker   = "prefix+n"
 
 # ---------------------------------------------------------------------------
 # Tabs
@@ -51,3 +54,4 @@ toggle_sidebar = "alt+b"
 
 [ui]
 pane_scrollbars = false
+agent_panel_sort = "spaces"
