@@ -14,37 +14,39 @@ path+="$HOME/.local/bin"
 bindkey $'\e[1;3D' backward-word
 bindkey $'\e[1;3C' forward-word
 
-# Smarter completion initialization
+# Smarter completion initialization - only rebuild the dump once a day.
+# stat(1) differs between BSD and GNU, so branch on the platform.
 autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+if [[ $OSTYPE == darwin* ]]; then
+    _zcompdump_day=$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+else
+    _zcompdump_day=$(date -r ~/.zcompdump +'%j' 2>/dev/null)
+fi
+if [[ "$(date +'%j')" != "$_zcompdump_day" ]]; then
     compinit
 else
     compinit -C
 fi
+unset _zcompdump_day
 
 # Source MYOB specific settings
 [[ -f "$HOME/.myob_zshrc" ]] && source "$HOME/.myob_zshrc"
 
-# Get Vault admin cert
-export VAULT_ADDR=https://vault.samiam.dev:8200
-alias vl='vault login -method=userpass username=admin'
-alias get-cert='vault write -field=signed_key ssh-client-signer/sign/user-role public_key=@$HOME/.ssh/id_ed25519_bw.pub valid_principals="admin" > ~/.ssh/id_ed25519_bw-cert.pub && echo "Certificate refreshed! Valid for 3h."'
+# Machine-local settings - hostnames, credentials, anything not for a public repo
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 # Neovim
 alias nv='nvim'
 alias nvd='nvim -d'
 alias nf='nvim $(fzf)'
-alias vf='nvim $(fzf)'
 
 # OMZ Theme
 ZSH_THEME="lukerandall-custom"
 
-# Go binaries
-# Brew OpenSSH - Built in SecurityKeyProvider
-path=(/usr/local/opt/openssh/bin $HOME/go/bin $path)
-
 # Bitwarden SSH Agent
-export SSH_AUTH_SOCK=/Users/sam/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+_bw_agent="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+[[ -S "$_bw_agent" ]] && export SSH_AUTH_SOCK="$_bw_agent"
+unset _bw_agent
 
 # OMZ
 ## Stop NVM slowing down terminal load time
@@ -56,7 +58,6 @@ plugins=(git kubectl zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 source $ZSH/oh-my-zsh.sh
-source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Fzf
 source <(fzf --zsh)
@@ -64,13 +65,13 @@ export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type directory . $HOME --exclude "/Library" --exclude "**/node_modules"'
 
-# Decode and pretty print JWTs - not working
+# Decode and pretty print a JWT payload (base64url, handles missing padding)
 jwt () {
-    cut -d"." -f1,2 <<< $1 | sed 's/\./\n/g' | base64 --decode | jq
+    local p="${1#*.}"; p="${p%%.*}"
+    p="${p//-/+}"; p="${p//_//}"
+    while (( ${#p} % 4 )); do p+="="; done
+    print -r -- "$p" | base64 --decode | jq
 }
-
-# Added by Antigravity
-export PATH="/Users/sam/.antigravity/antigravity/bin:$PATH"
 
 # Load Nix environment
 alias ns='nix-shell --command "exec zsh"'

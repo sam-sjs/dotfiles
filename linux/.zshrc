@@ -2,10 +2,7 @@
 alias idea='intellij-idea-ultimate-edition'
 
 # Source core .zshrc file
-source $HOME/dotfiles/.zshrc 
-
-# Local binaries
-path+="$HOME/.local/bin"
+source $HOME/dotfiles/.zshrc
 
 # Setup fzf keybindings and auto completions
 source /usr/share/fzf/key-bindings.zsh

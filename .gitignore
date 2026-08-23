@@ -1,18 +1,22 @@
-# MacOS files
+# macOS
 .DS_Store
 
-# Vim files
-.netrwhist  # Network oriented reading, writeing, browsing
-*.swp   # Swap file
-*.swo   # Swap file
+# Vim
+.netrwhist
+*.swp
+*.swo
 
-# VS Code settings file
-.vscode
-
+# Editors / IDEs
+.vscode/
+.idea/
 .luarc.json
 
 # Emacs
 auto-save-list/
 
-# Jetbrains
-.idea/
+# Machine-local shell config (not for a public repo)
+.zshrc.local
+
+# Tool state, not config
+hunk/state.json
+zen/chrome/zen-themes.css
