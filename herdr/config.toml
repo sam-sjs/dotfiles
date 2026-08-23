@@ -8,9 +8,15 @@ copy_mode = "prefix+c"
 # Workspaces
 # ---------------------------------------------------------------------------
 new_workspace      = "prefix+w"
-previous_workspace = "ctrl+alt+up"
-next_workspace     = "ctrl+alt+down"
 workspace_picker   = "prefix+n"
+previous_workspace = "ctrl+alt+shift+up"
+next_workspace     = "ctrl+alt+shift+down"
+
+# ---------------------------------------------------------------------------
+# Agents
+# ---------------------------------------------------------------------------
+previous_agent = "ctrl+alt+up"
+next_agent     = "ctrl+alt+down"
 
 # ---------------------------------------------------------------------------
 # Tabs
