@@ -1,9 +1,5 @@
 {
   // Rules are tried in order; the first match wins.
-  //
-  // Matching is on HID usage and identity, never on transport. The Karabiner virtual pointing
-  // device publishes no Transport property at all, which is why transport-keyed tools cannot
-  // see it and why this one does not try.
   "devices": [
     {
       "match": { "product": "Karabiner DriverKit VirtualHIDPointing*" },
@@ -14,30 +10,26 @@
   "profiles": {
     "trackball": {
       "pointer": {
-        // "curve"  — the full parametric shape below
-        // "linear" — flat multiplier, no acceleration (ignores resolution)
-        // "raw"    — no accelerator at all, 1:1 motion
+        // "curve" | "linear" | "raw"
         "mode": "curve",
 
         // HIDPointerResolution. HIGHER IS SLOWER. Allowed 10…1995.
         "resolution": 400,
 
-        // The index the curve set is evaluated at. 0.6875 is what a stock device carries.
+        // The index the curve set is evaluated at.
         "acceleration": 0.6875,
 
-        // Direct aliases for the kernel's own curve parameters. Run `goodmouse plot` after
-        // changing any of them — four polynomial coefficients cannot be tuned by feel.
         "curve": {
-          // Low-speed multiplier. This is what "sensitivity" means here.
-          "gainLinear": 1.0,
-          // How hard acceleration ramps. Enters the math as (gainParabolic * speed)^2.
-          "gainParabolic": 0.4,
+          // Low-speed multiplier — "sensitivity".
+          "gainLinear": 0.6,
+          // Enters the math as (gainParabolic * speed)^2.
+          "gainParabolic": 0.4622,
           // Enters as (gainCubic * speed)^3.
           "gainCubic": 0.08,
           // Enters as (gainQuartic * speed)^4.
           "gainQuartic": 0.0,
           // Where the polynomial ramp stops and a straight line takes over.
-          "kneeSpeed": 8.0,
+          "kneeSpeed": 6.9824,
           // Where the straight line gives way to a square-root taper.
           "taperSpeed": 18.0
         }
